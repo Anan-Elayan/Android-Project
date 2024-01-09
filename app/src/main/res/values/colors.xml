@@ -5,4 +5,12 @@
     <color name="green">#006325</color>
     <color name="textFieldBackGround">#EDEDED</color>
     <color name="iconColorNavigation">#3c415e</color>
+
+
+    <color name="background">#F0F4F3</color>
+    <color name="buttontext">#006325</color>
+
+    <color name="inactive">#C4C4C4</color>
+    <color name="active">#006325</color>
+
 </resources>

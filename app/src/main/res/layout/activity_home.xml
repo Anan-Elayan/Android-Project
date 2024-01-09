@@ -6,6 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".home.HomeActivity">
 
+    <ImageView
+        android:id="@+id/imageViewBottom"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/path"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="240dp"
+        android:src="@drawable/top_path"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/un"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
+        app:layout_constraintEnd_toEndOf="@id/imageViewTop"
+        app:layout_constraintStart_toStartOf="@id/imageViewTop"
+        app:layout_constraintTop_toTopOf="@id/imageViewTop" />
+
+    <TextView
+        android:id="@+id/textViewMyCourses"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="My Courses"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCourses"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toTopOf="@id/butonNavegation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewMyCourses" />
+
+
+
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/butonNavegation"
         android:layout_width="match_parent"
@@ -20,15 +86,7 @@
         app:mbn_selectedIconColor="@color/black"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="283dp"
-        android:text="Home Page"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
