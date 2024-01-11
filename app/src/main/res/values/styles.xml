@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="txtStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#0000FF</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="StyleEditText">
+        <item name="android:layout_width">280dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:background">@drawable/shape</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingLeft">10dp</item>
+
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">#B7B5B5</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
+
+</resources>

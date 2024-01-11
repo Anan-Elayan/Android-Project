@@ -25,6 +25,9 @@
             android:name=".LoginAndRegister.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".LoginAndRegister.Register"
+            android:exported="false" />
+        <activity
             android:name=".splash.MainActivity"
             android:exported="true"
             tools:ignore="DuplicateActivity">

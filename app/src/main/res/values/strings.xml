@@ -10,6 +10,7 @@
     <string name="hiden_one">"Create your project dates effortlessly by setting deadlines, milestones, and key tasks, ensuring a well-organized project timeline."</string>
     <string name="hiden_two">"Customize reminder settings based on your preferences, ensuring you never miss an important project-related task or submission."</string>
     <string name="hiden_three">"Manage your courses efficiently with Bordaring's dedicated Course Management feature. Add and organize your courses to have a comprehensive overview of your academic responsibilities"</string>
-
+    <string name="student_id">Student ID</string>
+    <string name="password">Password</string>
 
 </resources>
