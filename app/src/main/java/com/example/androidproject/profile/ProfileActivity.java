@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.androidproject.R;
 import com.example.androidproject.addCourse.AddCourseActivity;
 import com.example.androidproject.home.HomeActivity;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -17,7 +21,13 @@ import kotlin.jvm.functions.Function1;
 public class ProfileActivity extends AppCompatActivity {
 
     MeowBottomNavigation meowBottomNavigation;
-    TextView textView2;
+    TextView txtWelcomeMessage;
+    Button btnEdit;
+    Button btnUpdate;
+    TextInputEditText textInputEditTextEmail;
+    TextInputEditText textInputEditTextPassword;
+    TextInputLayout textInputLayoutEmail;
+    TextInputLayout textInputLayoutPassword;
     Intent intent;
 
 
@@ -25,10 +35,19 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        textView2 = findViewById(R.id.textView2);
-
+        setupViews();
         bottomNavigationSetUp();
 
+    }
+
+    public void setupViews(){
+        txtWelcomeMessage = findViewById(R.id.txtWelcomMessage);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnEdit = findViewById(R.id.btnEdit);
+        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
+        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextPassword = findViewById(R.id.textInpuEditTextPassword);
     }
 
     private void bottomNavigationSetUp() {

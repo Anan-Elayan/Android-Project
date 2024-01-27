@@ -20,7 +20,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/pass_ic"
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,15 +141,19 @@
         android:id="@+id/textInputLayout5"
         android:layout_width="368dp"
         android:layout_height="64dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Welcome">
+        app:layout_constraintTop_toBottomOf="@+id/Welcome"
+        tools:ignore="DuplicateIds">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/student_id"
+
             android:hint="Student ID" />
     </com.google.android.material.textfield.TextInputLayout>
 

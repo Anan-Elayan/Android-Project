@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.androidproject.home.HomeActivity;
 import com.example.androidproject.profile.ProfileActivity;
 import com.example.androidproject.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -17,7 +23,17 @@ import kotlin.jvm.functions.Function1;
 public class AddCourseActivity extends AppCompatActivity {
 
     MeowBottomNavigation meowBottomNavigation;
-    TextView textView4;
+    TextInputLayout textInputLayoutCourseID;
+    TextInputLayout textInputLayoutInstructor;
+    TextInputLayout textInputLayoutStarTime;
+    TextInputLayout textInputLayoutEndTime;
+    TextInputEditText textInputEditTextCourseID;
+    TextInputEditText textInputEditTextInstructor;
+    TextInputEditText textInputEditTextStarTime;
+    TextInputEditText textInputEditTextEndTime;
+    RadioButton saturday,monday ,wednesday,tuesday,thursday;
+    RadioGroup group;
+    Button btnAdd;
     Intent intent;
 
 
@@ -26,9 +42,23 @@ public class AddCourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
-        textView4 = findViewById(R.id.textView4);
-
+        setupViews();
         bottomNavigationSetUp();
+
+    }
+
+    public  void setupViews(){
+        btnAdd = findViewById(R.id.btnAdd);
+        saturday = findViewById(R.id.radioButtonS);
+        monday = findViewById(R.id.radioButtonM);
+        wednesday = findViewById(R.id.radioButtonW);
+        tuesday = findViewById(R.id.radioButtonT);
+        thursday = findViewById(R.id.radioButtonR);
+        textInputEditTextCourseID = findViewById(R.id.textInputEditTextCourseId);
+        textInputEditTextInstructor = findViewById(R.id.textInputEditTextInstructor);
+        textInputEditTextStarTime = findViewById(R.id.textInputEditTextStartTime);
+        textInputEditTextEndTime = findViewById(R.id.textInputEditTextEndTime);
+
 
     }
 
