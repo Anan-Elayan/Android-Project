@@ -48,5 +48,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("com.etebarian:meow-bottom-navigation:1.2.0")//button
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation ("junit:junit:4.+")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

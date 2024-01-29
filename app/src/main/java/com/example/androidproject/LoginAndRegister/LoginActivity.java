@@ -1,16 +1,13 @@
 package com.example.androidproject.LoginAndRegister;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidproject.R;
@@ -33,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        Button button = findViewById(R.id.login);
+        Button button = findViewById(R.id.btnRegister);
         TextView register =findViewById(R.id.createaccount);
         // button = findViewById(R.id.button);
 
