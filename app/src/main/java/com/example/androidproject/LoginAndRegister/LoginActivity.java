@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     Uri uriImg;
     Button button;
 
+    public static String studentId;
+    public static String password;
 
     private ShapeableImageView userImg;
 
@@ -65,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ActionLogin(View view) {
+        //here you sould complete the work needed
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
     }

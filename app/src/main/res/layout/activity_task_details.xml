@@ -135,7 +135,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/btnCalender"
                     android:layout_width="46dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -163,7 +163,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/btnClock"
                     android:layout_width="57dp"
                     android:layout_height="52dp"
                     android:layout_marginLeft="10dp"
@@ -180,7 +180,7 @@
                 android:layout_marginTop="0dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnAddTask"
                 style="@style/styleButton"
                 android:layout_width="363dp"
                 android:layout_height="wrap_content"

@@ -11,15 +11,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.androidproject.R;
+import com.example.androidproject.Task.TasksForCourse;
 import com.example.androidproject.addCourse.AddCourseActivity;
 import com.example.androidproject.model.Course;
 import com.example.androidproject.profile.ProfileActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements OnItemClickListener{
 
     MeowBottomNavigation meowBottomNavigation;
     RecyclerView recyclerViewCourses;
@@ -66,18 +69,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         courseList = new ArrayList<>(); // مكان لتحميل بيانات المساقات
-        courseList.add(new Course("Course 1", "2:00 PM - 3:00 PM", "Professor X"));
-        courseList.add(new Course("Course 2", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 3", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 4", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 5", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 6", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 7", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 8", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 9", "2:00 PM - 3:00 PM", "Professor y"));
-        courseList.add(new Course("Course 10", "2:00 PM - 3:00 PM", "Professor y"));
+        courseList.add(new Course("comp336", "2:00 PM - 3:00 PM", "Professor X"));
 
         courseAdapter = new CourseAdapter(courseList);
+        courseAdapter.setOnItemClickListener(this);
+
 
         recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCourses.setAdapter(courseAdapter);
@@ -139,5 +135,14 @@ public class HomeActivity extends AppCompatActivity {
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Course selectedCourse = courseList.get(position);
+
+        Intent intent = new Intent(HomeActivity.this, TasksForCourse.class);
+        intent.putExtra("courseID", selectedCourse.getCourseID());
+        startActivity(intent);
     }
 }

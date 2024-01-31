@@ -1,19 +1,18 @@
 package com.example.androidproject.model;
 
 public class Course {
-    private String courseName;
+    private String courseID;
     private String courseTime;
     private String professorName;
 
-    public Course(String courseName, String courseTime, String professorName) {
-        this.courseName = courseName;
+    public Course(String courseID, String courseTime, String professorName) {
+        this.courseID = courseID;
         this.courseTime = courseTime;
         this.professorName = professorName;
     }
-
     // Getters
-    public String getCourseName() {
-        return courseName;
+    public String getCourseID() {
+        return courseID;
     }
 
     public String getCourseTime() {
@@ -25,8 +24,8 @@ public class Course {
     }
 
     // Setters
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
     }
 
     public void setCourseTime(String courseTime) {
