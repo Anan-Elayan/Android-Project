@@ -48,15 +48,20 @@
         app:layout_constraintTop_toTopOf="@id/imageViewTop" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="391dp"
-        android:layout_height="567dp"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="217dp">
+        tools:layout_editor_absoluteY="217dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTop">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtCourseName"
@@ -75,6 +80,7 @@
                 android:layout_marginTop="15dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Title" />
@@ -87,6 +93,7 @@
                 android:layout_marginTop="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextDescription"
                     android:layout_width="match_parent"
                     android:layout_height="96dp"
                     android:hint="Description" />
@@ -104,13 +111,14 @@
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="12:00" />
+                        android:hint="Date" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/btnCalender"
                     android:layout_width="46dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -132,13 +140,14 @@
                     android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="1/1/2024" />
+                        android:hint="Time" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/btnClock"
                     android:layout_width="57dp"
                     android:layout_height="52dp"
                     android:layout_marginLeft="10dp"
@@ -152,15 +161,16 @@
                 android:layout_width="271dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="0dp"/>
+                android:layout_marginTop="0dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnAddTask"
                 style="@style/styleButton"
                 android:layout_width="363dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="40dp"
+                android:onClick="AddNewTask"
                 android:text="Add Tasks" />
 
         </LinearLayout>

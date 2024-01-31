@@ -66,12 +66,13 @@
             android:textSize="25dp" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/btnAddNewTask"
             android:layout_width="124dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="120dp"
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
+            android:onClick="AddNewTask"
             android:src="@drawable/add" />
     </LinearLayout>
 

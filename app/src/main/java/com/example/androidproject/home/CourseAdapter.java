@@ -16,9 +16,14 @@ import java.util.List;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
     private List<Course> courseList;
+    private static OnItemClickListener onItemClickListener;
 
     public CourseAdapter(List<Course> courseList) {
         this.courseList = courseList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @NonNull
@@ -31,7 +36,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Course course = courseList.get(position);
-        holder.textViewCourseName.setText(course.getCourseName());
+        holder.textViewCourseName.setText(course.getCourseID());
         holder.textViewCourseTime.setText(course.getCourseTime());
         holder.textViewProfessorName.setText(course.getProfessorName());
     }
@@ -56,6 +61,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             textViewCourseTime = view.findViewById(R.id.textViewCourseTime);
             textViewProfessorName = view.findViewById(R.id.textViewProfessorName);
             imageViewDelete = view.findViewById(R.id.imageViewDelete);
+
+            itemView.setOnClickListener(e -> {
+                if (onItemClickListener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

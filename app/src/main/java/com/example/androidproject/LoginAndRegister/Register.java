@@ -113,5 +113,4 @@ public class Register extends AppCompatActivity {
         queue.add(request);
     }
 
-
 }
