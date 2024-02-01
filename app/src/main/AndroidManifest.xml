@@ -27,6 +27,9 @@
             android:name=".Task.AddTask"
             android:exported="false" />
         <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
             android:name=".profile.ProfileActivity"
             android:exported="false" />
         <activity
