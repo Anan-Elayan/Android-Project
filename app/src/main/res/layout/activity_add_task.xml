@@ -47,133 +47,165 @@
         app:layout_constraintStart_toStartOf="@id/imageViewTop"
         app:layout_constraintTop_toTopOf="@id/imageViewTop" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="391dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="217dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTop">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBottom">
+
+        <TextView
+            android:id="@+id/txtCourseName"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:text="COMP336-Add Task"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="351dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtWarningTitle"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="لو سحمت ادخل عنوان المهمة"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="348dp"
+            android:layout_height="106dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:hint="Description" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtWarningDescription"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="لو سمحت ادخل وصف المهمة"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtCourseName"
-                android:layout_width="305dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="COMP336-Add Task"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
+            android:layout_width="367dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="351dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp">
+                android:layout_width="285dp"
+                android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextTitle"
+                    android:id="@+id/textInputEditTextDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Title" />
+                    android:hint="Date" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="348dp"
-                android:layout_height="108dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="96dp"
-                    android:hint="Description" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="367dp"
+            <ImageButton
+                android:id="@+id/btnCalender"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="285dp"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Date" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/btnCalender"
-                    android:layout_width="46dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/calendar_alt" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="367dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="285dp"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Time" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/btnClock"
-                    android:layout_width="57dp"
-                    android:layout_height="52dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/clock" />
-
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="271dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="0dp" />
-
-            <Button
-                android:id="@+id/btnAddTask"
-                style="@style/styleButton"
-                android:layout_width="363dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="40dp"
-                android:onClick="AddNewTask"
-                android:text="Add Tasks" />
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/calendar_alt" />
 
         </LinearLayout>
-    </ScrollView>
+
+        <TextView
+            android:id="@+id/txtWarningDate"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="لو سمحت ادخل تاريخ المهمة"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="367dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="285dp"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Time" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/btnClock"
+                android:layout_width="57dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/clock" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtWarningTime"
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="لو سمحنت ادخل وقت المهمة"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="invisible" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="271dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="0dp" />
+
+        <Button
+            android:id="@+id/btnAddTask"
+            style="@style/styleButton"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:onClick="AddNewTask"
+            android:text="Add Tasks" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

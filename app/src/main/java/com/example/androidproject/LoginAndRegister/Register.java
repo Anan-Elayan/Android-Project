@@ -1,12 +1,20 @@
 package com.example.androidproject.LoginAndRegister;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.MediaCodec;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -15,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.R;
+import com.example.androidproject.home.HomeActivity;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.android.volley.toolbox.JsonObjectRequest;
 
@@ -23,11 +33,22 @@ import org.json.JSONObject;
 
 public class Register extends AppCompatActivity {
 
+
+    private static final int CHOOSE_IMAGE = 101;
+    Uri uriImg;
+    private ImageView regesterImg;
+
+    private ShapeableImageView userImg;
     private Button btnRegister;
     private TextInputEditText textInputEditTextStudentID;
     private TextInputEditText textInputEditTextName;
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextPassword;
+    private TextView txtWarningID;
+    private TextView txtWarningName;
+    private TextView txtWarningEmail;
+    private TextView txtWarningPassword;
+    private TextView txtWarningImage;
 
 
     @Override
@@ -35,45 +56,68 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setupViews();
+        regesterImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getImage();
+            }
+        });
     }
 
 
-    public void setupViews(){
+    public void setupViews() {
 
         btnRegister = findViewById(R.id.btnRegister);
         textInputEditTextStudentID = findViewById(R.id.textInputEditTextStudetnID);
         textInputEditTextName = findViewById(R.id.textInputEditTextName);
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
+        regesterImg = findViewById(R.id.register_img);
+        userImg = findViewById(R.id.userImg);
+        txtWarningID = findViewById(R.id.txtWarningID);
+        txtWarningName = findViewById(R.id.txtWarningName);
+        txtWarningEmail = findViewById(R.id.txtWarningEmail);
+        txtWarningPassword = findViewById(R.id.txtWarningPassword);
+        txtWarningImage = findViewById(R.id.txtWarningImage);
 
     }
+
     public void registerClicked(View view) {
         String studentID = textInputEditTextStudentID.getText().toString();
         String studentName = textInputEditTextName.getText().toString();
         String studentEmail = textInputEditTextEmail.getText().toString();
         String studentPassword = textInputEditTextPassword.getText().toString();
+        String image = userImg.toString();
+        if (studentID.isEmpty()) {
+            txtWarningID.setVisibility(View.VISIBLE);
+        }
+        if (studentName.isEmpty()) {
+            txtWarningName.setVisibility(View.VISIBLE);
 
-        register(studentID, studentName, studentEmail,studentPassword);
+        }
+        if (studentEmail.isEmpty()) {
+            txtWarningEmail.setVisibility(View.VISIBLE);
+        }
+        if (studentPassword.isEmpty()) {
+            txtWarningPassword.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            register(studentID, studentName, studentEmail, studentPassword, image);
+        }
     }
 
-    private void register(String studentID, String studentName, String studentEmail , String studentPassword){
-        System.out.println("pppppppppppppppppppppppppppppppppppppppp");
-        String url = "http://10.0.2.2:85/register";
-
+    private void register(String studentID, String studentName, String studentEmail, String studentPassword, String image) {
+        String url = "http://10.0.2.2:5000/register";
         RequestQueue queue = Volley.newRequestQueue(Register.this);
-
-
-
         JSONObject jsonParams = new JSONObject();
         try {
             jsonParams.put("studentID", studentID);
             jsonParams.put("studentName", studentName);
             jsonParams.put("studentEmail", studentEmail);
             jsonParams.put("studentPassword", studentPassword);
-            System.out.println("try 1");
-
+            jsonParams.put("studentImage", image);
         } catch (JSONException e) {
-            System.out.println("catch 1");
             e.printStackTrace();
         }
 
@@ -89,6 +133,8 @@ public class Register extends AppCompatActivity {
                         try {
                             System.out.println("try");
                             str = response.getString("result");
+                            Intent intent = new Intent(Register.this, HomeActivity.class);
+                            startActivity(intent);
                         } catch (JSONException e) {
                             System.out.println("catch 2");
                             System.out.println(e.toString());
@@ -108,9 +154,28 @@ public class Register extends AppCompatActivity {
                     }
                 }
         );
-        // below line is to make
-        // a json object request.
         queue.add(request);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            uriImg = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriImg);
+                userImg.setImageBitmap(bitmap);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    private void getImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
     }
 
 }

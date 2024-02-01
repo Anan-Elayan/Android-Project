@@ -1,9 +1,13 @@
 package com.example.androidproject.profile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +27,7 @@ import com.example.androidproject.LoginAndRegister.Register;
 import com.example.androidproject.R;
 import com.example.androidproject.addCourse.AddCourseActivity;
 import com.example.androidproject.home.HomeActivity;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -34,6 +39,12 @@ import kotlin.jvm.functions.Function1;
 
 public class ProfileActivity extends AppCompatActivity {
 
+
+    private static final int CHOOSE_IMAGE = 101;
+    Uri uriImg;
+    private ImageView regesterImg;
+
+    private ShapeableImageView userImg;
     MeowBottomNavigation meowBottomNavigation;
     TextView txtWelcomeMessage;
     Button btnEdit;
@@ -44,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutPassword;
     Intent intent;
 
-    String studentID = "1210341";
+    String studentID = "1211529";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +64,12 @@ public class ProfileActivity extends AppCompatActivity {
         setupViews();
         bottomNavigationSetUp();
         setupUserInfo(studentID);
-
+        regesterImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getImage();
+            }
+        });
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,10 +98,12 @@ public class ProfileActivity extends AppCompatActivity {
                             String studentName = response.getString("studentName");
                             String studentImage = response.getString("studentImage");
                             String studentPassword = response.getString("studentPassword");
+                           // String urlImage = response.getString("studentImage");
 
                             txtWelcomeMessage.setText("Hello " + studentName);
                             textInputEditTextEmail.setText(studentEmail);
                             textInputEditTextPassword.setText(studentPassword);
+                            //userImg.setImageBitmap(new BitMap.());
 
                         } catch (JSONException e) {
                             Log.e("JSONException", e.toString());
@@ -142,11 +160,13 @@ public class ProfileActivity extends AppCompatActivity {
     public void setupViews(){
         txtWelcomeMessage = findViewById(R.id.txtWelcomMessage);
         btnUpdate = findViewById(R.id.btnUpdate);
-        btnEdit = findViewById(R.id.btnEdit);
         textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword = findViewById(R.id.textInpuEditTextPassword);
+        userImg = findViewById(R.id.userImg);
+        regesterImg = findViewById(R.id.register_img);
+
     }
 
     private void bottomNavigationSetUp() {
@@ -188,4 +208,26 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            uriImg = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uriImg);
+                userImg.setImageBitmap(bitmap);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    private void getImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
+    }
+
 }

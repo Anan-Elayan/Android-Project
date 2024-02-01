@@ -44,12 +44,13 @@ public class AddTask extends AppCompatActivity {
     private TextInputEditText textInputEditTextDescription;
     private TextInputEditText textInputEditTextDate;
     private TextInputEditText textInputEditTextTime;
-
+    private TextView txtWarningTitle;
+    private TextView txtWarningDescription;
+    private TextView txtWarningDate;
+    private TextView txtWarningTime;
     private ImageButton btnClock;
     private ImageButton btnCalender;
-
     private Button btnAddTask;
-
     private String courseID;
 
     @Override
@@ -128,6 +129,10 @@ public class AddTask extends AppCompatActivity {
         btnClock = findViewById(R.id.btnClock);
         btnCalender = findViewById(R.id.btnCalender);
         btnAddTask = findViewById(R.id.btnAddTask);
+        txtWarningTitle = findViewById(R.id.txtWarningTitle);
+        txtWarningDescription = findViewById(R.id.txtWarningDescription);
+        txtWarningTime = findViewById(R.id.txtWarningTime);
+        txtWarningDate = findViewById(R.id.txtWarningDate);
     }
     public void AddNewTask(View view) {
             String oldDate = textInputEditTextDate.getText().toString();
