@@ -1,13 +1,15 @@
 package com.example.androidproject.LoginAndRegister;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidproject.R;
@@ -22,19 +24,16 @@ public class LoginActivity extends AppCompatActivity {
     Uri uriImg;
     Button button;
 
-    public static String studentId;
-    public static String password;
 
     private ShapeableImageView userImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
-        Button button = findViewById(R.id.btnRegister);
-        TextView register =findViewById(R.id.createaccount);
-        // button = findViewById(R.id.button);
+        Button button = findViewById(R.id.button);
+
+        button = findViewById(R.id.button);
 
 
 //        regesterImg.setOnClickListener(new View.OnClickListener() {
@@ -67,13 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ActionLogin(View view) {
-        //here you sould complete the work needed
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-    public void ActionRegister(View view) {
-        Intent intent = new Intent(LoginActivity.this, Register.class);
         startActivity(intent);
     }
 }
