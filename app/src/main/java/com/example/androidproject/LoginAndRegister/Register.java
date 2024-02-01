@@ -1,12 +1,9 @@
 package com.example.androidproject.LoginAndRegister;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaCodec;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,11 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.R;
 import com.example.androidproject.home.HomeActivity;
@@ -28,16 +25,17 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Register extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class Register extends AppCompatActivity {
 
     private static final int CHOOSE_IMAGE = 101;
     Uri uriImg;
     private ImageView regesterImg;
-
     private ShapeableImageView userImg;
     private Button btnRegister;
     private TextInputEditText textInputEditTextStudentID;
@@ -102,9 +100,44 @@ public class Register extends AppCompatActivity {
             txtWarningPassword.setVisibility(View.VISIBLE);
 
         }
-        else {
-            register(studentID, studentName, studentEmail, studentPassword, image);
-        }
+
+        String url = "http://10.0.2.2:5000/getStudent";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        String id = obj.getString("studentID");
+                        if(id.equals(studentID)){
+                            Toast.makeText(Register.this, "already exit this account!!",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                    }catch(JSONException exception){
+                        Log.d("Error", exception.toString());
+                    }
+                }
+                register(studentID, studentName, studentEmail, studentPassword, image);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(Register.this, error.toString(),
+                        Toast.LENGTH_SHORT).show();
+                Log.d("Error_json", error.toString());
+            }
+        });
+
+        queue.add(request);
+
+
+
     }
 
     private void register(String studentID, String studentName, String studentEmail, String studentPassword, String image) {
@@ -133,7 +166,7 @@ public class Register extends AppCompatActivity {
                         try {
                             System.out.println("try");
                             str = response.getString("result");
-                            Intent intent = new Intent(Register.this, HomeActivity.class);
+                            Intent intent = new Intent(Register.this, LoginActivity.class);
                             startActivity(intent);
                         } catch (JSONException e) {
                             System.out.println("catch 2");

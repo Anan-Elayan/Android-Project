@@ -39,11 +39,9 @@ import kotlin.jvm.functions.Function1;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
     private static final int CHOOSE_IMAGE = 101;
     Uri uriImg;
     private ImageView regesterImg;
-
     private ShapeableImageView userImg;
     MeowBottomNavigation meowBottomNavigation;
     TextView txtWelcomeMessage;
@@ -103,7 +101,6 @@ public class ProfileActivity extends AppCompatActivity {
                             txtWelcomeMessage.setText("Hello " + studentName);
                             textInputEditTextEmail.setText(studentEmail);
                             textInputEditTextPassword.setText(studentPassword);
-                            //userImg.setImageBitmap(new BitMap.());
 
                         } catch (JSONException e) {
                             Log.e("JSONException", e.toString());

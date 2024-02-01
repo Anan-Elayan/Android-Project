@@ -120,7 +120,7 @@ public class AddTask extends AppCompatActivity {
         });
     }
 
-    public  void setupViews(){
+    public void setupViews() {
         txtCourseName = findViewById(R.id.txtCourseName);
         textInputEditTextTitle = findViewById(R.id.textInputEditTextTitle);
         textInputEditTextDescription = findViewById(R.id.textInputEditTextDescription);
@@ -134,58 +134,77 @@ public class AddTask extends AppCompatActivity {
         txtWarningTime = findViewById(R.id.txtWarningTime);
         txtWarningDate = findViewById(R.id.txtWarningDate);
     }
+
     public void AddNewTask(View view) {
-            String oldDate = textInputEditTextDate.getText().toString();
+        String title = textInputEditTextTitle.getText().toString();
+        String description = textInputEditTextDescription.getText().toString();
+        String time = textInputEditTextTime.getText().toString();
+        String oldDate = textInputEditTextDate.getText().toString();
+
+        if (title.isEmpty()) {
+            txtWarningTitle.setVisibility(View.VISIBLE);
+        }
+        if (description.isEmpty()) {
+            txtWarningDescription.setVisibility(View.VISIBLE);
+        }
+        if (time.isEmpty()) {
+            txtWarningTime.setVisibility(View.VISIBLE);
+        }
+        if (oldDate.isEmpty()) {
+            txtWarningDate.setVisibility(View.VISIBLE);
+        } else {
+
+
             String[] date = oldDate.split("/");
-            String newDate = date[2] +"-"+date[0]+"-"+date[1];//2024-01-16
-            String url = "http://10.0.2.2:5000/addTask/" + courseID + "/" + textInputEditTextTitle.getText().toString() + "/" + textInputEditTextDescription.getText().toString() + "/" + textInputEditTextTime.getText().toString() + "/" + newDate;
+            String newDate = date[2] + "-" + date[0] + "-" + date[1];//2024-01-16
+            String url = "http://10.0.2.2:5000/addTask/" + courseID + "/" + title + "/" + description + "/" + time + "/" + newDate;
             RequestQueue queue = Volley.newRequestQueue(AddTask.this);
 
-        JSONObject jsonParams = new JSONObject();
-        try {
-            jsonParams.put("courseID", courseID);
-            jsonParams.put("taskTitle", textInputEditTextTitle.getText().toString());
-            jsonParams.put("taskDescription", textInputEditTextDescription.getText().toString());
-            jsonParams.put("taskTime", textInputEditTextTime.getText().toString());
-            jsonParams.put("taskDate", newDate);
-            System.out.println("try 1");
+            JSONObject jsonParams = new JSONObject();
+            try {
+                jsonParams.put("courseID", courseID);
+                jsonParams.put("taskTitle", title);
+                jsonParams.put("taskDescription", description);
+                jsonParams.put("taskTime", time);
+                jsonParams.put("taskDate", newDate);
+                System.out.println("try 1");
 
-        } catch (JSONException e) {
-            System.out.println("catch 1");
-            e.printStackTrace();
-        }
+            } catch (JSONException e) {
+                System.out.println("catch 1");
+                e.printStackTrace();
+            }
 
-        // Create a JsonObjectRequest with POST method
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                jsonParams,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String str = "";
-                        try {
-                            System.out.println("try");
-                            str = response.getString("result");
-                        } catch (JSONException e) {
-                            System.out.println("catch 2");
-                            System.out.println(e.toString());
-                            e.printStackTrace();
+            // Create a JsonObjectRequest with POST method
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    jsonParams,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            String str = "";
+                            try {
+                                System.out.println("try");
+                                str = response.getString("result");
+                            } catch (JSONException e) {
+                                System.out.println("catch 2");
+                                System.out.println(e.toString());
+                                e.printStackTrace();
+                            }
+
+                            Toast.makeText(AddTask.this, str, Toast.LENGTH_SHORT).show();
+
                         }
-
-                        Toast.makeText(AddTask.this, str,
-                                Toast.LENGTH_SHORT).show();
-
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println("error");
+                            Log.d("VolleyError", error.toString());
+                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("error");
-                        Log.d("VolleyError", error.toString());
-                    }
-                }
-        );
+            );
             queue.add(request);
+        }
     }
 }
