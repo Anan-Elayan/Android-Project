@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.androidproject.LoginAndRegister.LoginActivity;
 import com.example.androidproject.LoginAndRegister.Register;
@@ -33,6 +34,9 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -53,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutPassword;
     Intent intent;
 
+    //344443
     String studentID = "1211529";
 
     @Override
@@ -72,16 +77,23 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                update(studentID,textInputEditTextEmail.getText().toString(),textInputEditTextPassword.getText().toString());
+                String url = uriImg.toString();
+                String[]spletArrya = url.split("/");
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < spletArrya.length; i++) {
+                    builder.append(spletArrya[i]);
+                    builder.append("&");
+                }
+                System.out.println("builder.toString----> " + builder.toString());
+                //builder.toString----> content:&&media&picker&0&com.android.providers.media.photopicker&media&1000000035&
+                update(studentID,textInputEditTextEmail.getText().toString(),textInputEditTextPassword.getText().toString(), builder.toString());
             }
         });
     }
 
     private void setupUserInfo(String studentId){
         String url = "http://10.0.2.2:5000/getStudent/"+studentId;
-
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
-
         // Create a JsonObjectRequest with GET method
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -94,9 +106,28 @@ public class ProfileActivity extends AppCompatActivity {
                             // Extract values from the JSON response
                             String studentEmail = response.getString("studentEmail");
                             String studentName = response.getString("studentName");
-                            String studentImage = response.getString("studentImage");
                             String studentPassword = response.getString("studentPassword");
-                           // String urlImage = response.getString("studentImage");
+                            String urlImage = response.getString("studentImage");
+
+                            String[]spletArrya = urlImage.split("&");
+                            StringBuilder builder = new StringBuilder();
+                            for (int i = 0; i < spletArrya.length; i++) {
+                                builder.append(spletArrya[i]);
+                                builder.append("/");
+
+                            }
+                            String str = builder.toString().substring(0,builder.toString().length()-1);
+                            System.out.println("URL image--> " + urlImage.toString());
+                            System.out.println("STR--> " + str);
+
+//                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(str));
+//                            userImg.setImageBitmap(bitmap);
+
+
+                            //Use Glide to load the image into ShapeableImageView
+                            Glide.with(ProfileActivity.this)
+                                    .load(userImg)
+                                    .into(userImg);
 
                             txtWelcomeMessage.setText("Hello " + studentName);
                             textInputEditTextEmail.setText(studentEmail);
@@ -119,8 +150,8 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void update(String studentId, String studentEmail, String studentPassword) {
-        String url = "http://10.0.2.2:5000/updateStudent/" + studentId + "/" + studentEmail + "/" + studentPassword;
+    private void update(String studentId, String studentEmail, String studentPassword,String image) {
+        String url = "http://10.0.2.2:5000/updateStudent/" + studentId + "/" + studentEmail + "/" + studentPassword + "/" + image;
 
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
 
@@ -133,6 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+
                             // Handle the response as needed
                             String message = response.getString("message");
                             Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();

@@ -100,7 +100,8 @@
                 app:shapeAppearanceOverlay="@style/circular"
                 app:strokeColor="@color/whitedark"
                 app:strokeWidth="1dp"
-                tools:elevation="2dp" />
+                tools:elevation="2dp"
+                tools:ignore="InvalidId"/>
 
             <ImageView
                 android:id="@+id/register_img"
@@ -115,9 +116,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
-                android:layout_width="377dp"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditTextEmail"
@@ -128,14 +130,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutPassword"
-                android:layout_width="372dp"
+                android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="25dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInpuEditTextPassword"
-                    android:layout_width="375dp"
+                    android:layout_width="354dp"
                     android:layout_height="39dp"
                     android:hint="Password" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +148,7 @@
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="85dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="Update" />
         </LinearLayout>
     </ScrollView>
