@@ -1,63 +1,47 @@
 package com.example.androidproject.model;
 
 public class Student {
-
+    private String name;
     private String studentID;
-    private String studentName;
-    private String studentPhone;
-    private String studentEmail;
-    private String studentPassword;
+    private String Email;
+    private String Pass;
 
-    public Student() {
-    }
-
-    public Student(String studentID, String studentName, String studentPhone, String studentEmail, String studentPassword) {
+    public Student(String name,String studentID, String email, String pass) {
+        this.name=name;
         this.studentID = studentID;
-        this.studentName = studentName;
-        this.studentPhone = studentPhone;
-        this.studentEmail = studentEmail;
-        this.studentPassword = studentPassword;
-    }
-
-    public String getStudentID() {
-        return studentID;
+        Email = email;
+        Pass = pass;
     }
 
     public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public void setEmail(String email) {
+        Email = email;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setPass(String pass) {
+        Pass = pass;
     }
 
-    public String getStudentPhone() {
-        return studentPhone;
+    public String getName() {
+        return name;
     }
 
-    public void setStudentPhone(String studentPhone) {
-        this.studentPhone = studentPhone;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public String getStudentID() {
+        return studentID;
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+    public String getEmail() {
+        return Email;
     }
 
-    public String getStudentPassword() {
-        return studentPassword;
+    public String getPass() {
+        return Pass;
     }
-
-    public void setStudentPassword(String studentPassword) {
-        this.studentPassword = studentPassword;
-    }
-
-
 }

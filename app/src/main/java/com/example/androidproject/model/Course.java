@@ -2,37 +2,67 @@ package com.example.androidproject.model;
 
 public class Course {
     private String courseID;
-    private String courseTime;
+    private String startTime;
     private String professorName;
+    private String date;
+    private String endTime;
 
-    public Course(String courseID, String courseTime, String professorName) {
+    public Course(String courseID, String startTime, String professorName, String date, String endTime) {
         this.courseID = courseID;
-        this.courseTime = courseTime;
+        this.startTime = startTime;
         this.professorName = professorName;
+        this.date = date;
+        this.endTime = endTime;
     }
-    // Getters
+
     public String getCourseID() {
         return courseID;
     }
 
-    public String getCourseTime() {
-        return courseTime;
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getProfessorName() {
         return professorName;
     }
 
-    // Setters
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
-    }
-
-    public void setCourseTime(String courseTime) {
-        this.courseTime = courseTime;
-    }
-
     public void setProfessorName(String professorName) {
         this.professorName = professorName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID='" + courseID + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", professorName='" + professorName + '\'' +
+                ", date='" + date + '\'' +
+                ", endTime='" + endTime + '\'' +
+                '}';
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidproject.R;
 import com.example.androidproject.model.Course;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
@@ -35,9 +36,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course course = courseList.get(position);
+        Course course = HomeActivity.courseList.get(position);
         holder.textViewCourseName.setText(course.getCourseID());
-        holder.textViewCourseTime.setText(course.getCourseTime());
+        holder.textViewCourseTime.setText(course.getStartTime());
         holder.textViewProfessorName.setText(course.getProfessorName());
     }
 
