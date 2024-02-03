@@ -1,6 +1,8 @@
 package com.example.androidproject.model;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String courseID;
     private String startTime;
     private String professorName;

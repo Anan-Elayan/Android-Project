@@ -24,7 +24,6 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.androidproject.LoginAndRegister.LoginActivity;
-import com.example.androidproject.LoginAndRegister.Register;
 import com.example.androidproject.R;
 import com.example.androidproject.addCourse.AddCourseActivity;
 import com.example.androidproject.home.HomeActivity;
@@ -34,10 +33,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -45,7 +40,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static final int CHOOSE_IMAGE = 101;
     Uri uriImg;
-    private ImageView regesterImg;
     private ShapeableImageView userImg;
     MeowBottomNavigation meowBottomNavigation;
     TextView txtWelcomeMessage;
@@ -56,37 +50,23 @@ public class ProfileActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutEmail;
     TextInputLayout textInputLayoutPassword;
     Intent intent;
+    String id = LoginActivity.id ;
 
-    //344443
-    String studentID = "1211529";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setupViews();
         bottomNavigationSetUp();
-        setupUserInfo(studentID);
-        regesterImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getImage();
-            }
-        });
+        setupUserInfo(id);
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String url = uriImg.toString();
-                String[]spletArrya = url.split("/");
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < spletArrya.length; i++) {
-                    builder.append(spletArrya[i]);
-                    builder.append("&");
-                }
-                System.out.println("builder.toString----> " + builder.toString());
-                //builder.toString----> content:&&media&picker&0&com.android.providers.media.photopicker&media&1000000035&
-                update(studentID,textInputEditTextEmail.getText().toString(),textInputEditTextPassword.getText().toString(), builder.toString());
+                update(id  ,textInputEditTextEmail.getText().toString()   ,textInputEditTextPassword.getText().toString());
             }
         });
     }
@@ -109,25 +89,14 @@ public class ProfileActivity extends AppCompatActivity {
                             String studentPassword = response.getString("studentPassword");
                             String urlImage = response.getString("studentImage");
 
-                            String[]spletArrya = urlImage.split("&");
-                            StringBuilder builder = new StringBuilder();
-                            for (int i = 0; i < spletArrya.length; i++) {
-                                builder.append(spletArrya[i]);
-                                builder.append("/");
-
-                            }
-                            String str = builder.toString().substring(0,builder.toString().length()-1);
-                            System.out.println("URL image--> " + urlImage.toString());
-                            System.out.println("STR--> " + str);
-
-//                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(str));
-//                            userImg.setImageBitmap(bitmap);
-
 
                             //Use Glide to load the image into ShapeableImageView
                             Glide.with(ProfileActivity.this)
-                                    .load(userImg)
+                                    .load(Uri.parse(urlImage))
                                     .into(userImg);
+
+
+                            System.out.println("Email"+studentEmail);
 
                             txtWelcomeMessage.setText("Hello " + studentName);
                             textInputEditTextEmail.setText(studentEmail);
@@ -150,8 +119,8 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void update(String studentId, String studentEmail, String studentPassword,String image) {
-        String url = "http://10.0.2.2:5000/updateStudent/" + studentId + "/" + studentEmail + "/" + studentPassword + "/" + image;
+    private void update(String studentId, String studentEmail, String studentPassword) {
+        String url = "http://10.0.2.2:5000/updateStudent/" + studentId + "/" + studentEmail + "/" + studentPassword ;
 
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
 
@@ -194,7 +163,6 @@ public class ProfileActivity extends AppCompatActivity {
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword = findViewById(R.id.textInpuEditTextPassword);
         userImg = findViewById(R.id.userImg);
-        regesterImg = findViewById(R.id.register_img);
 
     }
 
@@ -252,11 +220,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void getImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
-    }
+
 
 }

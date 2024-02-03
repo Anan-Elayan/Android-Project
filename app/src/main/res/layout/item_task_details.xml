@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="25dp"
-        android:text="Course Name"
+        android:text="Title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="@id/textViewTaskTime"
         app:layout_constraintEnd_toStartOf="@id/textViewTaskTime"
@@ -22,26 +22,13 @@
         android:id="@+id/textViewTaskTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:text="Course Time"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewProfessorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
-        android:text="Professor Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/textViewTaskTime"
-        app:layout_constraintTop_toBottomOf="@id/textViewTaskTime" />
 
     <ImageView
         android:id="@+id/imageViewDelete"

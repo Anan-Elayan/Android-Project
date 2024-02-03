@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidproject.R;
 import com.example.androidproject.model.Course;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
@@ -36,11 +35,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course course = HomeActivity.courseList.get(position);
+        Course course = courseList.get(position);
         holder.textViewCourseName.setText(course.getCourseID());
         holder.textViewCourseTime.setText(course.getStartTime());
         holder.textViewProfessorName.setText(course.getProfessorName());
     }
+
 
     @Override
     public int getItemCount() {
@@ -58,8 +58,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         public CourseViewHolder(View view) {
             super(view);
-            textViewCourseName = view.findViewById(R.id.textViewCourseName);
-            textViewCourseTime = view.findViewById(R.id.textViewCourseTime);
+            textViewCourseName = view.findViewById(R.id.textViewTaskTitle);
+            textViewCourseTime = view.findViewById(R.id.textViewTaskTime);
             textViewProfessorName = view.findViewById(R.id.textViewProfessorName);
             imageViewDelete = view.findViewById(R.id.imageViewDelete);
 
@@ -72,6 +72,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 }
             });
         }
+    }
+
+    public Course getCourseAtPosition(int position) {
+        if (position >= 0 && position < courseList.size()) {
+            return courseList.get(position);
+        }
+        return null;
     }
 }
 

@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.androidproject.LoginAndRegister.LoginActivity;
@@ -42,10 +43,15 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     MeowBottomNavigation meowBottomNavigation;
     RecyclerView recyclerViewCourses;
     CourseAdapter courseAdapter;
-    public  static  ArrayList<Course> courseList;
+    public ArrayList<Course> courseList;
+    private Course courseDetails;
+
+    public String id = LoginActivity.id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         courseList = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -53,24 +59,10 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         meowBottomNavigation = findViewById(R.id.butonNavegation);
         setupBottomNavigation();
         setupCourses();
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                handler.postDelayed(this, 1000); // repeated for every 1000 milleSeconds = 1 second ( infinite loop)
-
-            }
-        });
-
-          setupRecyclerView();
+        //setupRecyclerView();
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        setupRecyclerView();
-    }
 
     private void setupBottomNavigation() {
         meowBottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.add_circle));
@@ -82,14 +74,17 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             switch (model.getId()) {
                 case 1:
                     intent = new Intent(HomeActivity.this, AddCourseActivity.class);
+                    intent.putExtra("FROM_HOME_ID_TO_ADD", id);
                     startActivity(intent);
                     break;
                 case 2:
                     intent = new Intent(HomeActivity.this, HomeActivity.class);
+                    intent.putExtra("FROM_HOME_ID_TO_HOME", id);
                     startActivity(intent);
                     break;
                 case 3:
                     intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                    intent.putExtra("FROM_HOME_ID_TO_PROFILE", id);
                     startActivity(intent);
                     break;
             }
@@ -98,9 +93,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void setupRecyclerView() {
-//        ArrayList<Course> list = new ArrayList<>();
-//        list.add(new Course("1211529","4:30","Adel","8/7","7:30"));
-//        System.out.println("setupRecyclerView");
 
         courseAdapter = new CourseAdapter(courseList);
         courseAdapter.setOnItemClickListener(this);
@@ -117,10 +109,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT) {
-                    // عرض أيقونة سلة المحذوفات وتغيير الخلفية
                     CourseAdapter.CourseViewHolder holder = (CourseAdapter.CourseViewHolder) viewHolder;
                     holder.imageViewDelete.setVisibility(View.VISIBLE);
-                    // عرض الإنذار للتأكيد
                     showAlertForConfirmation(viewHolder.getAdapterPosition());
                 }
             }
@@ -128,9 +118,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                if (dX < 0) { // فقط عند السحب لليسار
+                if (dX < 0) {
                     View itemView = viewHolder.itemView;
-                    // إظهار أيقونة سلة المحذوفات
                     CourseAdapter.CourseViewHolder holder = (CourseAdapter.CourseViewHolder) viewHolder;
                     holder.imageViewDelete.setVisibility(View.VISIBLE);
                 }
@@ -140,15 +129,15 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 super.clearView(recyclerView, viewHolder);
                 CourseAdapter.CourseViewHolder holder = (CourseAdapter.CourseViewHolder) viewHolder;
-                holder.imageViewDelete.setVisibility(View.GONE); // إخفاء أيقونة سلة المحذوفات
+                holder.imageViewDelete.setVisibility(View.GONE);
             }
         };
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerViewCourses);
     }
 
-    public ArrayList<Course> setupCourses() {
+    public void setupCourses() {
         System.out.println("setupCourses");
-        String id = LoginActivity.id;
+        //String id = LoginActivity.id;
         String url = "http://10.0.2.2:5000/getCourses/" + id;
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
@@ -159,13 +148,17 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                     try {
                         JSONObject obj = response.getJSONObject(i);
                         String courseId = obj.getString("courseID");
-                        HomeActivity.this.courseList.add(getCourseDetails(courseId));
+                        getCourseDetails(courseId);
                         System.out.println("Size list" + courseList.size());
+                        setupRecyclerView();
+
+
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
                     }
                 }
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -175,12 +168,13 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             }
         });
         queue.add(request);
-        return courseList;
+
+        // return courseList;
     }
 
-    public Course getCourseDetails(String courseID) {
+    public void getCourseDetails(String courseID) {
         System.out.println("getCourseDetails");
-        final Course[] course = new Course[5];
+        //Course courseDetails;
         String url = "http://10.0.2.2:5000/getCoursesById/" + courseID;
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
@@ -194,8 +188,9 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                     String courseID = obj.getString("courseID");
                     String courseStartTime = obj.getString("courseStartTime");
                     String date = obj.getString("date");
-                    course[0] = new Course(courseID, courseStartTime, courseDr, date, courseEndTime);
-                    System.out.println("ID ----> " + course[0].getCourseID());
+                    courseDetails = new Course(courseID, courseStartTime, courseDr, date, courseEndTime);
+                    System.out.println("first ID ----> " + courseDetails.getCourseID());
+                    courseList.add(courseDetails);
                 } catch (JSONException exception) {
                     Log.d("Error", exception.toString());
                 }
@@ -203,24 +198,58 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 Toast.makeText(HomeActivity.this, error.toString(),
                         Toast.LENGTH_SHORT).show();
                 Log.d("Error_json", error.toString());
             }
         });
         queue.add(request);
-        return course[0];
+
     }
 
     private void showAlertForConfirmation(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to delete this course ?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
+            String courseID = courseAdapter.getCourseAtPosition(position).getCourseID();
+            String url = "http://10.0.2.2:5000/deleteCourse/" + id + "/" + courseID;
+            RequestQueue queue = Volley.newRequestQueue(HomeActivity.this);
+
+            // Create a JsonObjectRequest with PUT method
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.DELETE,
+                    url,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                // Handle the response as needed
+                                String message = response.getString("message");
+                                Toast.makeText(HomeActivity.this, message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                Log.e("JSONException", e.toString());
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("VolleyError", error.toString());
+                        }
+                    }
+            );
+            queue.add(request);
             courseAdapter.removeItem(position);
         });
+
         builder.setNegativeButton("No", (dialog, which) -> {
-            courseAdapter.notifyItemChanged(position);
+            // Do nothing or provide any specific action if needed
+            // This will cancel the deletion operation
         });
+
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -229,7 +258,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     public void onItemClick(int position) {
         Course selectedCourse = courseList.get(position);
         Intent intent = new Intent(HomeActivity.this, TasksForCourse.class);
-        intent.putExtra("courseID", selectedCourse.getCourseID());
+        intent.putExtra("course", selectedCourse);
         startActivity(intent);
     }
 

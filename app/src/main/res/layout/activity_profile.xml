@@ -103,17 +103,6 @@
                 tools:elevation="2dp"
                 tools:ignore="InvalidId"/>
 
-            <ImageView
-                android:id="@+id/register_img"
-                android:layout_width="52dp"
-                android:layout_height="42dp"
-                android:layout_marginLeft="167dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userImg"
-                app:srcCompat="@drawable/photo_64" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
                 android:layout_width="360dp"

@@ -23,6 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.R;
 import com.example.androidproject.home.HomeActivity;
@@ -39,9 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    private ImageView regesterImg;
     private static final int CHOOSE_IMAGE = 101;
-    Uri uriImg;
     Button button;
     ArrayList<Student> studentList = new ArrayList<>();
     private RequestQueue queue;
@@ -50,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox remCh;
     public static String id;
 
-
-    private ShapeableImageView userImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +72,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void ActionLogin(View view) {
+        String str = studentid.getText().toString();
         int isExist= Check(); // to check the input data if exist or no
         if(isExist==1){
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            //intent.putExtra("STUDENTID",str);
             startActivity(intent);
+
             Toast.makeText(LoginActivity.this, "يا هلا و مرحبا، نورت 😁",
                     Toast.LENGTH_LONG).show();
         }else if(isExist==0){
@@ -105,27 +105,27 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void LoadData() {
-
-        String url = "http://10.0.2.2:5000/getStudent";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        String url = "http://10.0.2.2:5000/getStudent/" + studentid.getText().toString();
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         try {
-                            for (int i = 0; i < response.length(); i++) {
+                            // Check for the presence of the "error" key in the response
+                            if (response.has("error")) {
+                                Toast.makeText(LoginActivity.this, "Student not registered in the system",
+                                        Toast.LENGTH_LONG).show();
 
-                                JSONObject studentJson = response.getJSONObject(i);
-
-                                String name = studentJson.getString("studentName");
-                                 id = studentJson.getString("studentID");
-                                String email = studentJson.getString("studentEmail");
-                                String pass = studentJson.getString("studentPassword");
-
+                            } else {
+                                // Parse the student details from the response
+                                String name = response.getString("studentName");
+                                id = String.valueOf(response.getInt("studentID"));
+                                System.out.println("my id" + id);
+                                String email = response.getString("studentEmail");
+                                String pass = response.getString("studentPassword");
                                 Student student = new Student(name, id, email, pass);
-
                                 studentList.add(student);
-
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -138,11 +138,11 @@ public class LoginActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-
-        queue.add(jsonArrayRequest);
-
-
+        queue.add(jsonObjectRequest);
     }
+
+
+
     private int Check(){
         String EditTxtID=studentid.getText().toString();
         String EditTxtPass=pass.getText().toString();

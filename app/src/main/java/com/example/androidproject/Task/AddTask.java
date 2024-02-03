@@ -27,8 +27,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.androidproject.LoginAndRegister.LoginActivity;
 import com.example.androidproject.LoginAndRegister.Register;
 import com.example.androidproject.R;
+import com.example.androidproject.home.HomeActivity;
+import com.example.androidproject.model.Course;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -51,17 +54,20 @@ public class AddTask extends AppCompatActivity {
     private ImageButton btnClock;
     private ImageButton btnCalender;
     private Button btnAddTask;
-    private String courseID;
+    String id = LoginActivity.id;
+    Course course;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-        setupViews();
         Intent intent = getIntent();
-        if (intent != null) {
-            courseID = intent.getStringExtra("courseID");
-        }
+        course = (Course) intent.getSerializableExtra("course");
+        setupViews();
+        txtCourseName.setText(course.getCourseID() + "-Add Task");
+
         btnClock.setOnClickListener(new View.OnClickListener() {
             int hour = 0, minutes = 0;
 
@@ -118,6 +124,7 @@ public class AddTask extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
     }
 
     public void setupViews() {
@@ -157,17 +164,17 @@ public class AddTask extends AppCompatActivity {
 
             String[] date = oldDate.split("/");
             String newDate = date[2] + "-" + date[0] + "-" + date[1];//2024-01-16
-            String url = "http://10.0.2.2:5000/addTask/" + courseID + "/" + title + "/" + description + "/" + time + "/" + newDate;
+            String url = "http://10.0.2.2:5000/addTask/" + course.getCourseID() + "/" + title + "/" + description + "/" + time + "/" + newDate;
             RequestQueue queue = Volley.newRequestQueue(AddTask.this);
 
             JSONObject jsonParams = new JSONObject();
             try {
-                jsonParams.put("courseID", courseID);
+                jsonParams.put("courseID", course.getCourseID());
                 jsonParams.put("taskTitle", title);
                 jsonParams.put("taskDescription", description);
                 jsonParams.put("taskTime", time);
                 jsonParams.put("taskDate", newDate);
-                System.out.println("try 1");
+                //   insertIntoCourseTaskTable(course.getCourseID(),course.);
 
             } catch (JSONException e) {
                 System.out.println("catch 1");
@@ -207,4 +214,53 @@ public class AddTask extends AppCompatActivity {
             queue.add(request);
         }
     }
+
+    public void insertIntoCourseTaskTable(String courseID, int taskID) {
+        String url = "http://10.0.2.2:5000/insertIntoCourseTasks/" + courseID + "/" + taskID;
+        RequestQueue queue = Volley.newRequestQueue(AddTask.this);
+
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("courseID", courseID);
+            jsonParams.put("taskTitle", taskID);
+
+
+        } catch (JSONException e) {
+            System.out.println("catch 1");
+            e.printStackTrace();
+        }
+
+        // Create a JsonObjectRequest with POST method
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jsonParams,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        String str = "";
+                        try {
+                            System.out.println("try");
+                            str = response.getString("result");
+                        } catch (JSONException e) {
+                            System.out.println("catch 2");
+                            System.out.println(e.toString());
+                            e.printStackTrace();
+                        }
+
+                        Toast.makeText(AddTask.this, str, Toast.LENGTH_SHORT).show();
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("error");
+                        Log.d("VolleyError", error.toString());
+                    }
+                }
+        );
+        queue.add(request);
+    }
+
 }
