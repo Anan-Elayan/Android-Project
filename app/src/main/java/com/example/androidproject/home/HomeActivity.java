@@ -98,8 +98,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         courseAdapter.setOnItemClickListener(this);
         recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCourses.setAdapter(courseAdapter);
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_item_spacing);
-        recyclerViewCourses.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+       // int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_item_spacing);
+       // recyclerViewCourses.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -135,6 +135,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerViewCourses);
     }
 
+
+
     public void setupCourses() {
         System.out.println("setupCourses");
         //String id = LoginActivity.id;
@@ -150,7 +152,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                         String courseId = obj.getString("courseID");
                         getCourseDetails(courseId);
                         System.out.println("Size list" + courseList.size());
-                        setupRecyclerView();
+                        //setupRecyclerView();
 
 
                     } catch (JSONException exception) {
@@ -191,6 +193,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                     courseDetails = new Course(courseID, courseStartTime, courseDr, date, courseEndTime);
                     System.out.println("first ID ----> " + courseDetails.getCourseID());
                     courseList.add(courseDetails);
+                    setupRecyclerView();
                 } catch (JSONException exception) {
                     Log.d("Error", exception.toString());
                 }
@@ -263,6 +266,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     public void action(View view) {
-        setupRecyclerView();
+        //setupRecyclerView();
     }
 }

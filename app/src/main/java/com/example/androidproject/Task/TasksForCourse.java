@@ -66,8 +66,11 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
     private void setupRecyclerView() {
-
+        System.out.println("ANAN" +"------" +taskList.size());
         taskAdapter = new TasksAdapter(taskList);
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println("taskList"+taskList.get(i).getCourseID());
+        }
         taskAdapter.setOnItemClickListener(this);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTasks.setAdapter(taskAdapter);
@@ -114,8 +117,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     public void setupTasks() {
         System.out.println("setupCourses");
         //String id = LoginActivity.id;
+        System.out.println(AddTask.countTasks+"----"+LoginActivity.id+"----"+course.getCourseID());
 
-        String url = "http://10.0.2.2:5000/getTasksById/" + AddTask.countTasks +"/"+ LoginActivity.id+"/"+course.getCourseID();
+        String url = "http://10.0.2.2:5000/getTasksById/" +"/"+ LoginActivity.id+"/"+course.getCourseID();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -124,7 +128,6 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-                        int taskID = obj.getInt("taskID");
                         String studentID = obj.getString("studentID");
                         String CourseID = obj.getString("CourseID");
                         String taskDate = obj.getString("taskDate");
@@ -132,13 +135,16 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                         String taskTime = obj.getString("taskTime");
                         String taskTitle = obj.getString("taskTitle");
 
-                        Task task = new Task(studentID,taskID,CourseID,taskTitle, taskDescription,taskDate,taskTime);
+                        Task task = new Task(studentID,CourseID,taskTitle, taskDescription,taskDate,taskTime);
+                        System.out.println("task--> " + task.toString());
+
                         taskList.add(task);
 
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
                     }
                 }
+                setupRecyclerView();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -206,6 +212,6 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
     public void showTasks(View view) {
-        setupRecyclerView();
+       // setupRecyclerView();
     }
 }

@@ -147,6 +147,7 @@ public class AddTask extends AppCompatActivity {
         String title = textInputEditTextTitle.getText().toString();
         String description = textInputEditTextDescription.getText().toString();
         String time = textInputEditTextTime.getText().toString();
+        
         String oldDate = textInputEditTextDate.getText().toString();
 
         if (title.isEmpty()) {
@@ -164,12 +165,13 @@ public class AddTask extends AppCompatActivity {
 
 
             String[] date = oldDate.split("/");
+            String[]finalTime = time.split(" ");
             String newDate = date[2] + "-" + date[0] + "-" + date[1];//2024-01-16
             String url = "http://10.0.2.2:5000/addTask/" + course.getCourseID() + "/" + title + "/"
-                    + description + "/" + time + "/" + newDate+"/"+LoginActivity.id+"/"+countTasks++;
+                    + description + "/" + finalTime[0] + "/" + newDate+"/"+LoginActivity.id+"/"+countTasks++;
 
             RequestQueue queue = Volley.newRequestQueue(AddTask.this);
-
+            System.out.println(course.getCourseID()+"--->"+title+"-->"+description+"-->"+finalTime[0]+"--->"+newDate+"-->"+LoginActivity.id+"-->"+countTasks);
             JSONObject jsonParams = new JSONObject();
             try {
                 jsonParams.put("CourseID", course.getCourseID());

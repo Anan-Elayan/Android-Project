@@ -1,7 +1,6 @@
 package com.example.androidproject.model;
 
 public class Task {
-    private int taskID;
     private String courseID;
     private String taskTitle;
     private String taskDescription;
@@ -10,9 +9,8 @@ public class Task {
     private String studentID;
 
 
-    public Task(String studentID,int taskID, String courseID, String taskTitle, String taskDescription, String taskDate, String taskTime) {
+    public Task(String studentID, String courseID, String taskTitle, String taskDescription, String taskDate, String taskTime) {
         this.studentID = studentID;
-        this.taskID = taskID;
         this.courseID = courseID;
         this.taskTitle = taskTitle;
         this.taskDescription = taskDescription;
@@ -31,13 +29,7 @@ public class Task {
         this.studentID = studentID;
     }
 
-    public int getTaskID() {
-        return taskID;
-    }
 
-    public void setTaskID(int taskID) {
-        this.taskID = taskID;
-    }
 
     public String getCourseID() {
         return courseID;
@@ -77,5 +69,16 @@ public class Task {
 
     public void setTaskTime(String taskTime) {
         this.taskTime = taskTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" + ", courseID='" + courseID + '\'' +
+                ", taskTitle='" + taskTitle + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", taskDate='" + taskDate + '\'' +
+                ", taskTime='" + taskTime + '\'' +
+                ", studentID='" + studentID + '\'' +
+                '}';
     }
 }

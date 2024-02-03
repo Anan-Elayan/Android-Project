@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     Button button;
     ArrayList<Student> studentList = new ArrayList<>();
     private RequestQueue queue;
-    private EditText studentid;
+    private EditText studentID;
     private EditText pass;
     private CheckBox remCh;
 
@@ -55,29 +55,31 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        studentid=findViewById(R.id.studentID);
+        studentID=findViewById(R.id.studentID);
         pass=findViewById(R.id.pass);
         remCh=findViewById(R.id.rememberMe);
         queue = Volley.newRequestQueue(this);
-
+        LoadData();
         setupSharedPrefs();
         checkRememberMe();
-        LoadData();
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LoadData();
+
+        // LoadData();
     }
 
     public void ActionLogin(View view) {
-        String str = studentid.getText().toString();
+
+
+        id = studentID.getText().toString();
         int isExist= Check(); // to check the input data if exist or no
         if(isExist==1){
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            //intent.putExtra("STUDENTID",str);
             startActivity(intent);
 
             Toast.makeText(LoginActivity.this, "يا هلا و مرحبا، نورت 😁",
@@ -92,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (remCh.isChecked()) {
-            editor.putString("ID",studentid.getText().toString() );
+            editor.putString("ID",studentID.getText().toString() );
             editor.putString("PASS", pass.getText().toString());
             editor.putBoolean("FLAG", true);
             editor.commit();
@@ -106,48 +108,55 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void LoadData() {
-        String url = "http://10.0.2.2:5000/getStudent/" + studentid.getText().toString();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            // Check for the presence of the "error" key in the response
-                            if (response.has("error")) {
-                                Toast.makeText(LoginActivity.this, "Student not registered in the system",
-                                        Toast.LENGTH_LONG).show();
+        String url = "http://10.0.2.2:5000//getStudent";
 
-                            } else {
-                                // Parse the student details from the response
-                                String name = response.getString("studentName");
-                                id = String.valueOf(response.getInt("studentID"));
-                                System.out.println("my id" + id);
-                                String email = response.getString("studentEmail");
-                                String pass = response.getString("studentPassword");
-                                Student student = new Student(name, id, email, pass);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                String studentID= jsonObject.getString("studentID");
+                                String name = jsonObject.getString("studentName");
+                                String email = jsonObject.getString("studentEmail");
+                                String pass = jsonObject.getString("studentPassword");
+                                Student student = new Student(name, studentID, email, pass);
+                                System.out.println(student.toString());
                                 studentList.add(student);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
+
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+                        // Handle error
                     }
                 });
-        queue.add(jsonObjectRequest);
+
+
+        queue.add(jsonArrayRequest);
     }
 
 
 
     private int Check(){
-        String EditTxtID=studentid.getText().toString();
+        System.out.println("U in check , the size of list is : "+studentList.size());
+        for(Student student:studentList){
+            System.out.println( "loop :>>>>"+student.toString());
+        }
+        String EditTxtID=studentID.getText().toString();
+        System.out.println( "loop :iddddd>>>>"+EditTxtID);
         String EditTxtPass=pass.getText().toString();
         for(Student student:studentList){
+            System.out.println("inside loop:<<<<"+student.toString());
             if(student.getStudentID().equals(EditTxtID)) {
                 if (student.getPass().equals(EditTxtPass)) {
                     return 1;
@@ -169,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
         if (flag) {
             String name = prefs.getString("ID", "");
             String password = prefs.getString("PASS", "");
-            studentid.setText(name);
+            studentID.setText(name);
             pass.setText(password);
             remCh.setChecked(true);
         }
