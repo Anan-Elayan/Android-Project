@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText studentid;
     private EditText pass;
     private CheckBox remCh;
+
     public static String id;
 
 
