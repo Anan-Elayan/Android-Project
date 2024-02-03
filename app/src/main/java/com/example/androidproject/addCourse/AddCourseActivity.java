@@ -95,7 +95,6 @@ public class AddCourseActivity extends AppCompatActivity {
         txtWarningCourseID = findViewById(R.id.txtWarningCourseID);
         txtWarningdate = findViewById(R.id.txtWarningdate);
 
-
     }
 
     private void bottomNavigationSetUp() {
@@ -139,12 +138,12 @@ public class AddCourseActivity extends AppCompatActivity {
 
 
     public void actionAdd(View view) {
-        String id = spinnerCourse.getSelectedItem().toString();
+        String courseid = spinnerCourse.getSelectedItem().toString();
         String instructor = spinnerDr.getSelectedItem().toString();
         String startTime = txtStartTime.getText().toString();
         String endTime = txtEndTime.getText().toString();
         String date = txtDate.getText().toString();
-        if(id.isEmpty()){
+        if(courseid.isEmpty()){
                 txtWarningCourseID.setVisibility(View.VISIBLE);
         }
         if(instructor.isEmpty()){
@@ -160,20 +159,19 @@ public class AddCourseActivity extends AppCompatActivity {
             txtWarningdate.setVisibility(View.VISIBLE);
         }
         else {
-            addToBackEnd(id, instructor, startTime, endTime, date);
+            addToBackEnd(LoginActivity.id, courseid, instructor);
         }
     }
 
-    public void addToBackEnd(String courseID, String doctor, String startTime, String endTime, String date) {
-        String url = "http://10.0.2.2:5000/addNewCourse/" + courseID + "/" + doctor + "/" + startTime + "/" + endTime + "/" + date;
+    public void addToBackEnd(String studentID, String courseID, String courseDr) {
+        String url = "http://10.0.2.2:5000/registerationCourse/" + studentID + "/" + courseID + "/" + courseDr ;
         RequestQueue queue = Volley.newRequestQueue(AddCourseActivity.this);
         JSONObject jsonParams = new JSONObject();
         try {
+            jsonParams.put("studentID", studentID);
             jsonParams.put("courseID", courseID);
-            jsonParams.put("courseDr", doctor);
-            jsonParams.put("courseStartTime", startTime);
-            jsonParams.put("courseEndTime", endTime);
-            jsonParams.put("date", date);
+            jsonParams.put("courseDr", courseDr);
+            
         } catch (JSONException e) {
             e.printStackTrace();
         }

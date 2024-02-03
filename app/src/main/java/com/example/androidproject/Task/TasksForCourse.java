@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.androidproject.LoginAndRegister.LoginActivity;
 import com.example.androidproject.R;
 import com.example.androidproject.home.OnItemClickListener;
 import com.example.androidproject.home.SpaceItemDecoration;
@@ -113,7 +114,8 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     public void setupTasks() {
         System.out.println("setupCourses");
         //String id = LoginActivity.id;
-        String url = "http://10.0.2.2:5000/getTasks/" + course.getCourseID();
+
+        String url = "http://10.0.2.2:5000/getTasksById/" + AddTask.countTasks +"/"+ LoginActivity.id+"/"+course.getCourseID();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -122,10 +124,16 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-                        String taskID = obj.getString("taskID");
-                        //System.out.println("the course is :"+getCourseDetails(courseId).toString());
-                        getTasksDetails(taskID);
+                        int taskID = obj.getInt("taskID");
+                        String studentID = obj.getString("studentID");
+                        String CourseID = obj.getString("CourseID");
+                        String taskDate = obj.getString("taskDate");
+                        String taskDescription = obj.getString("taskDescription");
+                        String taskTime = obj.getString("taskTime");
+                        String taskTitle = obj.getString("taskTitle");
 
+                        Task task = new Task(studentID,taskID,CourseID,taskTitle, taskDescription,taskDate,taskTime);
+                        taskList.add(task);
 
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
@@ -145,41 +153,6 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         // return courseList;
     }
 
-    public void getTasksDetails(String taskID) {
-        System.out.println("getCourseDetails");
-        //Course courseDetails;
-        String url = "http://10.0.2.2:5000/getTasksById/" + taskID;
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    JSONObject obj = response.getJSONObject(0);
-                    String courseID = obj.getString("courseID");
-                    String taskDate = obj.getString("taskDate");
-                    String taskDescription = obj.getString("taskDescription");
-                    int taskID = obj.getInt("taskID");
-                    String taskTime = obj.getString("taskTime");
-                    String taskTitle = obj.getString("taskTitle");
-                    taskDetails = new Task(taskID, courseID, taskTitle, taskDescription, taskDate,taskTime);
-                    taskList.add(taskDetails);
-                } catch (JSONException exception) {
-                    Log.d("Error", exception.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(TasksForCourse.this, error.toString(),
-                        Toast.LENGTH_SHORT).show();
-                Log.d("Error_json", error.toString());
-            }
-        });
-        queue.add(request);
-
-    }
 
     private void showAlertForConfirmation(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

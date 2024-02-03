@@ -56,6 +56,7 @@ public class AddTask extends AppCompatActivity {
     private Button btnAddTask;
     String id = LoginActivity.id;
     Course course;
+    public  static  int countTasks = 1 ;
 
 
     @Override
@@ -164,16 +165,20 @@ public class AddTask extends AppCompatActivity {
 
             String[] date = oldDate.split("/");
             String newDate = date[2] + "-" + date[0] + "-" + date[1];//2024-01-16
-            String url = "http://10.0.2.2:5000/addTask/" + course.getCourseID() + "/" + title + "/" + description + "/" + time + "/" + newDate;
+            String url = "http://10.0.2.2:5000/addTask/" + course.getCourseID() + "/" + title + "/"
+                    + description + "/" + time + "/" + newDate+"/"+LoginActivity.id+"/"+countTasks++;
+
             RequestQueue queue = Volley.newRequestQueue(AddTask.this);
 
             JSONObject jsonParams = new JSONObject();
             try {
-                jsonParams.put("courseID", course.getCourseID());
+                jsonParams.put("CourseID", course.getCourseID());
                 jsonParams.put("taskTitle", title);
                 jsonParams.put("taskDescription", description);
                 jsonParams.put("taskTime", time);
                 jsonParams.put("taskDate", newDate);
+                jsonParams.put("studentID",LoginActivity.id);
+                jsonParams.put("taskID", countTasks);
                 //   insertIntoCourseTaskTable(course.getCourseID(),course.);
 
             } catch (JSONException e) {

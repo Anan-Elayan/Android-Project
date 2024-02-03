@@ -7,8 +7,11 @@ public class Task {
     private String taskDescription;
     private String taskDate;
     private String taskTime;
+    private String studentID;
 
-    public Task(int taskID, String courseID, String taskTitle, String taskDescription, String taskDate, String taskTime) {
+
+    public Task(String studentID,int taskID, String courseID, String taskTitle, String taskDescription, String taskDate, String taskTime) {
+        this.studentID = studentID;
         this.taskID = taskID;
         this.courseID = courseID;
         this.taskTitle = taskTitle;
@@ -18,6 +21,14 @@ public class Task {
     }
 
     public Task() {
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 
     public int getTaskID() {
