@@ -1,6 +1,10 @@
 package com.example.androidproject.model;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
+
+
     private String courseID;
     private String taskTitle;
     private String taskDescription;
@@ -8,17 +12,28 @@ public class Task {
     private String taskTime;
     private String studentID;
 
+    private  String taskID;
 
-    public Task(String studentID, String courseID, String taskTitle, String taskDescription, String taskDate, String taskTime) {
+
+    public Task(String studentID, String courseID, String taskTitle, String taskDescription, String taskDate, String taskTime,String taskID) {
         this.studentID = studentID;
         this.courseID = courseID;
         this.taskTitle = taskTitle;
         this.taskDescription = taskDescription;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
+        this.taskID = taskID;
     }
 
     public Task() {
+    }
+
+    public String getTaskID() {
+        return taskID;
+    }
+
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
     }
 
     public String getStudentID() {

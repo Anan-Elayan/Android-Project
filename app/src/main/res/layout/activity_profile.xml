@@ -90,7 +90,7 @@
                 android:id="@+id/userImg"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_marginLeft="150dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:src="@drawable/user1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +101,7 @@
                 app:strokeColor="@color/whitedark"
                 app:strokeWidth="1dp"
                 tools:elevation="2dp"
-                tools:ignore="InvalidId"/>
+                tools:ignore="InvalidId" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
@@ -136,9 +136,25 @@
                 style="@style/styleButton"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="Update" />
+                android:layout_marginBottom="40dp"
+                android:text="Update"
+                android:textColor="#248D1D" />
+
+            <Button
+                android:id="@+id/btnLogOut"
+                style="@style/styleButton"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/shapbuttonlogout"
+                android:backgroundTint="@color/active"
+                android:gravity="center"
+                android:onClick="actionLogOut"
+                android:text="Log out"
+                android:textAlignment="center"
+                android:textColor="@color/background" />
         </LinearLayout>
     </ScrollView>
 

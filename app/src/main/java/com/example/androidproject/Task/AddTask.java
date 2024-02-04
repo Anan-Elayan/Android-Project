@@ -1,17 +1,12 @@
 package com.example.androidproject.Task;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,9 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.LoginAndRegister.LoginActivity;
-import com.example.androidproject.LoginAndRegister.Register;
 import com.example.androidproject.R;
-import com.example.androidproject.home.HomeActivity;
 import com.example.androidproject.model.Course;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -56,7 +49,7 @@ public class AddTask extends AppCompatActivity {
     private Button btnAddTask;
     String id = LoginActivity.id;
     Course course;
-    public  static  int countTasks = 1 ;
+   // public  static  int countTasks = 1 ;
 
 
     @Override
@@ -136,7 +129,7 @@ public class AddTask extends AppCompatActivity {
         textInputEditTextTime = findViewById(R.id.textInputEditTextTime);
         btnClock = findViewById(R.id.btnClock);
         btnCalender = findViewById(R.id.btnCalender);
-        btnAddTask = findViewById(R.id.btnAddTask);
+        btnAddTask = findViewById(R.id.btnUpdateTask);
         txtWarningTitle = findViewById(R.id.txtWarningTitle);
         txtWarningDescription = findViewById(R.id.txtWarningDescription);
         txtWarningTime = findViewById(R.id.txtWarningTime);
@@ -168,10 +161,9 @@ public class AddTask extends AppCompatActivity {
             String[]finalTime = time.split(" ");
             String newDate = date[2] + "-" + date[0] + "-" + date[1];//2024-01-16
             String url = "http://10.0.2.2:5000/addTask/" + course.getCourseID() + "/" + title + "/"
-                    + description + "/" + finalTime[0] + "/" + newDate+"/"+LoginActivity.id+"/"+countTasks++;
+                    + description + "/" + finalTime[0] + "/" + newDate+"/"+LoginActivity.id;
 
             RequestQueue queue = Volley.newRequestQueue(AddTask.this);
-            System.out.println(course.getCourseID()+"--->"+title+"-->"+description+"-->"+finalTime[0]+"--->"+newDate+"-->"+LoginActivity.id+"-->"+countTasks);
             JSONObject jsonParams = new JSONObject();
             try {
                 jsonParams.put("CourseID", course.getCourseID());
@@ -180,7 +172,7 @@ public class AddTask extends AppCompatActivity {
                 jsonParams.put("taskTime", time);
                 jsonParams.put("taskDate", newDate);
                 jsonParams.put("studentID",LoginActivity.id);
-                jsonParams.put("taskID", countTasks);
+                //jsonParams.put("taskID", countTasks);
                 //   insertIntoCourseTaskTable(course.getCourseID(),course.);
 
             } catch (JSONException e) {
@@ -269,5 +261,6 @@ public class AddTask extends AppCompatActivity {
         );
         queue.add(request);
     }
+
 
 }

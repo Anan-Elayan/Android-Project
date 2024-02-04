@@ -33,6 +33,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -45,12 +46,13 @@ public class ProfileActivity extends AppCompatActivity {
     TextView txtWelcomeMessage;
     Button btnEdit;
     Button btnUpdate;
+    Button btnLogOut;
     TextInputEditText textInputEditTextEmail;
     TextInputEditText textInputEditTextPassword;
     TextInputLayout textInputLayoutEmail;
     TextInputLayout textInputLayoutPassword;
     Intent intent;
-    String id = LoginActivity.id ;
+    String id = LoginActivity.id;
 
 
     @Override
@@ -66,13 +68,13 @@ public class ProfileActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update(id  ,textInputEditTextEmail.getText().toString()   ,textInputEditTextPassword.getText().toString());
+                update(id, textInputEditTextEmail.getText().toString(), textInputEditTextPassword.getText().toString());
             }
         });
     }
 
-    private void setupUserInfo(String studentId){
-        String url = "http://10.0.2.2:5000/getStudent/"+studentId;
+    private void setupUserInfo(String studentId) {
+        String url = "http://10.0.2.2:5000/getStudent/" + studentId;
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
         // Create a JsonObjectRequest with GET method
         JsonObjectRequest request = new JsonObjectRequest(
@@ -96,7 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     .into(userImg);
 
 
-                            System.out.println("Email"+studentEmail);
+                            System.out.println("Email" + studentEmail);
 
                             txtWelcomeMessage.setText("Hello " + studentName);
                             textInputEditTextEmail.setText(studentEmail);
@@ -120,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void update(String studentId, String studentEmail, String studentPassword) {
-        String url = "http://10.0.2.2:5000/updateStudent/" + studentId + "/" + studentEmail + "/" + studentPassword ;
+        String url = "http://10.0.2.2:5000/updateStudent/" + studentId + "/" + studentEmail + "/" + studentPassword;
 
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
 
@@ -155,7 +157,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    public void setupViews(){
+    public void setupViews() {
         txtWelcomeMessage = findViewById(R.id.txtWelcomMessage);
         btnUpdate = findViewById(R.id.btnUpdate);
         textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
@@ -163,6 +165,7 @@ public class ProfileActivity extends AppCompatActivity {
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
         textInputEditTextPassword = findViewById(R.id.textInpuEditTextPassword);
         userImg = findViewById(R.id.userImg);
+        btnLogOut = findViewById(R.id.btnLogOut);
 
     }
 
@@ -221,5 +224,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    public void actionLogOut(View view) {
 
+
+    }
 }

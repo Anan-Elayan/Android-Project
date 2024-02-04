@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.LoginAndRegister.LoginActivity;
 import com.example.androidproject.R;
+import com.example.androidproject.home.HomeActivity;
 import com.example.androidproject.home.OnItemClickListener;
 import com.example.androidproject.home.SpaceItemDecoration;
 import com.example.androidproject.model.Course;
@@ -52,11 +53,18 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         recyclerViewTasks = findViewById(R.id.recyclerView);
 
         Intent intent = getIntent();
-         course = (Course) intent.getSerializableExtra("course");
+        course = (Course) intent.getSerializableExtra("course");
 
         lblCourseid = findViewById(R.id.lblCourseid);
         lblCourseid.setText("Show Tasks for " + course.getCourseID());
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         setupTasks();
+       // setupRecyclerView();
     }
 
     public void AddNewTask(View view) {
@@ -74,8 +82,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         taskAdapter.setOnItemClickListener(this);
         recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewTasks.setAdapter(taskAdapter);
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_item_spacing);
-        recyclerViewTasks.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+
+//        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_item_spacing);
+//        recyclerViewTasks.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -114,10 +123,15 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerViewTasks);
     }
 
+
+
+
+
+
     public void setupTasks() {
+        taskList = new ArrayList<>();
         System.out.println("setupCourses");
         //String id = LoginActivity.id;
-        System.out.println(AddTask.countTasks+"----"+LoginActivity.id+"----"+course.getCourseID());
 
         String url = "http://10.0.2.2:5000/getTasksById/" +"/"+ LoginActivity.id+"/"+course.getCourseID();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -134,8 +148,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                         String taskDescription = obj.getString("taskDescription");
                         String taskTime = obj.getString("taskTime");
                         String taskTitle = obj.getString("taskTitle");
+                        String taskID = obj.getString("taskID");
 
-                        Task task = new Task(studentID,CourseID,taskTitle, taskDescription,taskDate,taskTime);
+                        Task task = new Task(studentID,CourseID,taskTitle, taskDescription,taskDate,taskTime,taskID);
                         System.out.println("task--> " + task.toString());
 
                         taskList.add(task);
@@ -164,8 +179,8 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to delete this course ?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
-            String courseID = taskAdapter.getCourseAtPosition(position).getCourseID();
-            String url = "http://10.0.2.2:5000/deleteCourse/" + course.getCourseID() + "/" + courseID;
+            String taskID = taskAdapter.getCourseAtPosition(position).getTaskID();
+            String url = "http://10.0.2.2:5000/deleteTask/" + taskID;
             RequestQueue queue = Volley.newRequestQueue(TasksForCourse.this);
 
             // Create a JsonObjectRequest with PUT method
@@ -208,7 +223,10 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
 
     @Override
     public void onItemClick(int position) {
-
+        Task selectedCourse = taskList.get(position);
+        Intent intent = new Intent(TasksForCourse.this, TaskDetails.class);
+        intent.putExtra("task", selectedCourse);
+        startActivity(intent);
     }
 
     public void showTasks(View view) {

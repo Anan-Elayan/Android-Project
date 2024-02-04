@@ -197,7 +197,7 @@
             android:layout_marginTop="0dp" />
 
         <Button
-            android:id="@+id/btnAddTask"
+            android:id="@+id/btnUpdateTask"
             style="@style/styleButton"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
