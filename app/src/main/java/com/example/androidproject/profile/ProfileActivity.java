@@ -225,7 +225,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void actionLogOut(View view) {
-
-
+        System.out.println("action");
+        Intent intent1 = new Intent(ProfileActivity.this, LoginActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent1);
+        finish();
     }
 }
