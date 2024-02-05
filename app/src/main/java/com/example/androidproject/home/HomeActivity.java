@@ -3,6 +3,7 @@ package com.example.androidproject.home;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -54,6 +55,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     public static ConstraintLayout constraintHome;
     private SharedPreferences prefs;
     TextView textViewMyCourses;
+    TextView textView;
 
 
     @Override
@@ -62,15 +64,18 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         courseList = new ArrayList<>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
         meowBottomNavigation = findViewById(R.id.butonNavegation);
         constraintHome = findViewById(R.id.constraintHome);
         textViewMyCourses = findViewById(R.id.textViewMyCourses);
+        textView = findViewById(R.id.textView);
+        textView.setVisibility(View.VISIBLE);
         setupBottomNavigation();
         setupCourses();
         setupSharedPrefs();
         ColorMode();
-        //setupRecyclerView();
+
 
     }
 
@@ -105,12 +110,11 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     private void setupRecyclerView() {
 
+        textView.setVisibility(View.INVISIBLE);
         courseAdapter = new CourseAdapter(courseList);
         courseAdapter.setOnItemClickListener(this);
         recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCourses.setAdapter(courseAdapter);
-       // int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_item_spacing);
-       // recyclerViewCourses.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -164,8 +168,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                         getCourseDetails(courseId);
                         System.out.println("Size list" + courseList.size());
                         //setupRecyclerView();
-
-
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
                     }
@@ -205,6 +207,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                     System.out.println("first ID ----> " + courseDetails.getCourseID());
                     courseList.add(courseDetails);
                     setupRecyclerView();
+
                 } catch (JSONException exception) {
                     Log.d("Error", exception.toString());
                 }
@@ -291,6 +294,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         if(dark_mode){
             constraintHome.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
             textViewMyCourses.setTextColor(getResources().getColor(R.color.white));
+            textView.setTextColor(getResources().getColor(R.color.white));
         }
     }
 }

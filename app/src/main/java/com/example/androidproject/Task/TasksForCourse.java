@@ -1,16 +1,17 @@
 package com.example.androidproject.Task;
 
-import androidx.annotation.NonNull;
+import android.database.DataSetObserver;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -27,9 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.LoginAndRegister.LoginActivity;
 import com.example.androidproject.R;
-import com.example.androidproject.home.HomeActivity;
 import com.example.androidproject.home.OnItemClickListener;
-import com.example.androidproject.home.SpaceItemDecoration;
 import com.example.androidproject.model.Course;
 import com.example.androidproject.model.Task;
 
@@ -40,15 +39,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class TasksForCourse extends AppCompatActivity implements OnItemClickListener {
-    RecyclerView recyclerViewTasks;
-    TasksAdapter taskAdapter;
+public class TasksForCourse extends AppCompatActivity implements OnItemClickListener  {
+    //    RecyclerView recyclerViewTasks;
+    ListView listViewTasks;
+
+    //    TasksAdapter adapter;
+    ListAdapter listAdapter;
     public ArrayList<Task> taskList;
     private Task taskDetails;
     private TextView lblCourseid;
     Course course;
 
     ConstraintLayout constraintLayout;
+
     private SharedPreferences prefs;
 
 
@@ -57,7 +60,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_for_course); // Move this line here
         taskList = new ArrayList<>();
-        recyclerViewTasks = findViewById(R.id.recyclerView);
+
+        listViewTasks = findViewById(R.id.listViewTasks);
+
         constraintLayout = findViewById(R.id.constraintLayout);
 
         Intent intent = getIntent();
@@ -74,7 +79,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     protected void onStart(){
         super.onStart();
         setupTasks();
-       // setupRecyclerView();
+        // setupRecyclerView();
 
     }
 
@@ -84,59 +89,19 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         startActivity(intent);
     }
 
-    private void setupRecyclerView() {
-        System.out.println("ANAN" +"------" +taskList.size());
-        taskAdapter = new TasksAdapter(taskList);
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println("taskList"+taskList.get(i).getCourseID());
-        }
-        taskAdapter.setOnItemClickListener(this);
-        recyclerViewTasks.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewTasks.setAdapter(taskAdapter);
-
-//        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_item_spacing);
-//        recyclerViewTasks.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+    private void setupListView() {
+        listAdapter = new ListAdapter(this,R.layout.list_row,taskList);
+        listViewTasks.setAdapter(listAdapter);
+        listViewTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Task selectedTask = taskList.get(position);
+                Intent intent = new Intent(TasksForCourse.this, TaskDetails.class);
+                intent.putExtra("task", selectedTask);
+                startActivity(intent);
             }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                if (direction == ItemTouchHelper.LEFT) {
-                    // عرض أيقونة سلة المحذوفات وتغيير الخلفية
-                    TasksAdapter.taskViewHolder holder = (TasksAdapter.taskViewHolder) viewHolder;
-                    holder.imageViewDelete.setVisibility(View.VISIBLE);
-                    // عرض الإنذار للتأكيد
-                    showAlertForConfirmation(viewHolder.getAdapterPosition());
-                }
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-                if (dX < 0) { // فقط عند السحب لليسار
-                    View itemView = viewHolder.itemView;
-                    // إظهار أيقونة سلة المحذوفات
-                    TasksAdapter.taskViewHolder holder = (TasksAdapter.taskViewHolder) viewHolder;
-                    holder.imageViewDelete.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                super.clearView(recyclerView, viewHolder);
-                TasksAdapter.taskViewHolder holder = (TasksAdapter.taskViewHolder) viewHolder;
-                holder.imageViewDelete.setVisibility(View.GONE); // إخفاء أيقونة سلة المحذوفات
-            }
-        };
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerViewTasks);
+        });
     }
-
-
-
-
 
 
     public void setupTasks() {
@@ -170,7 +135,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                         Log.d("Error", exception.toString());
                     }
                 }
-                setupRecyclerView();
+                setupListView();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -190,7 +155,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to delete this course ?");
         builder.setPositiveButton("Yes", (dialog, which) -> {
-            String taskID = taskAdapter.getCourseAtPosition(position).getTaskID();
+            String taskID = listAdapter.getItemByPosition(position).getTaskID();
             String url = "http://10.0.2.2:5000/deleteTask/" + taskID;
             RequestQueue queue = Volley.newRequestQueue(TasksForCourse.this);
 
@@ -220,7 +185,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                     }
             );
             queue.add(request);
-            taskAdapter.removeItem(position);
+//            listAdapter.removeItem(position);
         });
 
         builder.setNegativeButton("No", (dialog, which) -> {
@@ -241,7 +206,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
     public void showTasks(View view) {
-       // setupRecyclerView();
+        // setupRecyclerView();
     }
 
     private void setupSharedPrefs() {

@@ -76,12 +76,16 @@
             android:backgroundTint="@android:color/transparent"
             android:onClick="AddNewTask"
             android:src="@drawable/add" />
+
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="387dp"
-        android:layout_height="435dp"
+    <ListView
+        android:id="@+id/listViewTasks"
+        android:layout_width="405dp"
+        android:layout_height="468dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
