@@ -5,7 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".LoginAndRegister.Register">
+    tools:context=".LoginAndRegister.Register"
+    tools:ignore="ExtraText">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/userImg"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/user1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBottom"
+        app:shapeAppearanceOverlay="@style/circular"
+        app:strokeColor="@color/whitedark"
+        app:strokeWidth="1dp"
+        tools:elevation="2dp" />
+
+    <ImageView
+        android:id="@+id/register_img"
+        android:layout_width="52dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginTop="-20dp"
+        android:elevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImg"
+        app:srcCompat="@drawable/photo_64" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/textFields"
@@ -86,31 +116,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
         app:layout_constraintVertical_bias="0.526" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/userImg"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/user1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewBottom"
-        app:shapeAppearanceOverlay="@style/circular"
-        app:strokeColor="@color/whitedark"
-        app:strokeWidth="1dp"
-        tools:elevation="2dp" />
-
-    <ImageView
-        android:id="@+id/register_img"
-        android:layout_width="52dp"
-        android:layout_height="42dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userImg"
-        app:srcCompat="@drawable/photo_64" />
-
     <com.google.android.material.textfield.TextInputLayout
         style="@style/textFields"
         android:layout_width="373dp"
@@ -127,7 +132,6 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_img">
 
@@ -136,7 +140,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Student ID"
-            android:inputType="number|numberDecimal" />
+            android:inputType="number|numberDecimal"
+            android:maxLength="20" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

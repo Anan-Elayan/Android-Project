@@ -56,7 +56,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         course = (Course) intent.getSerializableExtra("course");
 
         lblCourseid = findViewById(R.id.lblCourseid);
-        lblCourseid.setText("Show Tasks for " + course.getCourseID());
+        lblCourseid.setText("Tasks for " + course.getCourseID());
 
     }
 

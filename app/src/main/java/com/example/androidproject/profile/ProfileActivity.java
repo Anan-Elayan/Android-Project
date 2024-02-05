@@ -2,16 +2,23 @@ package com.example.androidproject.profile;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +47,8 @@ import kotlin.jvm.functions.Function1;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final int CHOOSE_IMAGE = 101;
+    private Switch switchMode;
+    private ConstraintLayout constraintLayout;
     Uri uriImg;
     private ShapeableImageView userImg;
     MeowBottomNavigation meowBottomNavigation;
@@ -53,6 +62,10 @@ public class ProfileActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutPassword;
     Intent intent;
     String id = LoginActivity.id;
+    boolean flag;
+
+    private SharedPreferences preferences;
+
 
 
     @Override
@@ -71,7 +84,38 @@ public class ProfileActivity extends AppCompatActivity {
                 update(id, textInputEditTextEmail.getText().toString(), textInputEditTextPassword.getText().toString());
             }
         });
+        setupTheam();
+
+
     }
+
+    public  void setupTheam(){
+        switchMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // Change background color based on switch state
+                if (isChecked) {
+
+                    constraintLayout.setBackgroundColor(getResources().getColor(R.color.black));
+                    HomeActivity.constraintHome.setBackgroundColor(getResources().getColor(R.color.black));
+                    txtWelcomeMessage.setTextColor(getResources().getColor(R.color.white));
+                    textInputEditTextEmail.setTextColor(getResources().getColor(R.color.white));
+                    textInputEditTextPassword.setTextColor(getResources().getColor(R.color.white));
+                } else {
+                    constraintLayout.setBackgroundColor(getResources().getColor(R.color.white));
+                    HomeActivity.constraintHome.setBackgroundColor(getResources().getColor(R.color.white));
+                    txtWelcomeMessage.setTextColor(getResources().getColor(R.color.black));
+                    textInputEditTextEmail.setTextColor(getResources().getColor(R.color.black));
+                    textInputEditTextPassword.setTextColor(getResources().getColor(R.color.black));
+                }
+            }
+        });
+
+    }
+
+
+
+
 
     private void setupUserInfo(String studentId) {
         String url = "http://10.0.2.2:5000/getStudent/" + studentId;
@@ -166,7 +210,8 @@ public class ProfileActivity extends AppCompatActivity {
         textInputEditTextPassword = findViewById(R.id.textInpuEditTextPassword);
         userImg = findViewById(R.id.userImg);
         btnLogOut = findViewById(R.id.btnLogOut);
-
+        switchMode = findViewById(R.id.switchMode);
+        constraintLayout = findViewById(R.id.constraintLayout);
     }
 
     private void bottomNavigationSetUp() {

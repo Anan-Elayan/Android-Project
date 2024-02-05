@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeActivity">
@@ -24,11 +25,11 @@
         android:id="@+id/imageViewTop"
         android:layout_width="wrap_content"
         android:layout_height="240dp"
-        android:src="@drawable/top_path"
         android:scaleType="centerCrop"
+        android:src="@drawable/top_path"
         app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -45,33 +46,33 @@
         app:layout_constraintStart_toStartOf="@id/imageViewTop"
         app:layout_constraintTop_toTopOf="@id/imageViewTop" />
 
+
     <TextView
         android:id="@+id/textViewMyCourses"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:onClick="action"
-        android:text="Show Courses"
+        android:text="My Courses"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewLogo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCourses"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="389dp"
+        android:layout_height="431dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
         app:layout_constraintBottom_toTopOf="@id/butonNavegation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewMyCourses" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/textViewMyCourses"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/butonNavegation"
@@ -87,7 +88,15 @@
         app:mbn_selectedIconColor="@color/black"
         tools:ignore="MissingConstraints" />
 
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewCourses"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewCourses"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewCourses"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTop" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

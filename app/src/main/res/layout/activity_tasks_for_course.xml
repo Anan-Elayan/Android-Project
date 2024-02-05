@@ -47,22 +47,23 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="388dp"
-        android:layout_height="78dp"
+        android:layout_width="400dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTop">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBottom">
 
         <TextView
             android:id="@+id/lblCourseid"
-            android:layout_width="wrap_content"
+            android:layout_width="334dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
             android:onClick="showTasks"
-            android:text="Show task for Comp336"
+            android:text="Task for Comp336"
             android:textColor="@color/black"
             android:textSize="25dp" />
 
@@ -70,7 +71,6 @@
             android:id="@+id/btnAddNewTask"
             android:layout_width="124dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="40dp"
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:onClick="AddNewTask"
@@ -79,13 +79,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="365dp"
-        android:layout_height="474dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="387dp"
+        android:layout_height="435dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 

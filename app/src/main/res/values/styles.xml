@@ -32,4 +32,11 @@
         <item name="android:textColor">#248D1D</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat">
+        <!-- Your dark theme attributes -->
+        <item name="android:background">#333333</item>
+        <item name="colorPrimary">#2196F3</item>
+        <!-- Add other dark theme attributes -->
+    </style>
 </resources>

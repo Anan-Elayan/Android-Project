@@ -55,9 +55,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
     TextView txtWarningCourseID;
     TextView txtWarningDr;
-    TextView txtWarningStartTime;
-    TextView txtWarningEndTime;
-    TextView txtWarningdate;
+
     Button btnAdd;
     Intent intent;
     ArrayList<Course>courseIDToSpinner;
@@ -92,8 +90,7 @@ public class AddCourseActivity extends AppCompatActivity {
         txtStartTime = findViewById(R.id.txtStartTime);
         txtEndTime = findViewById(R.id.txtEndTime);
         txtDate = findViewById(R.id.txtDate);
-        txtWarningCourseID = findViewById(R.id.txtWarningCourseID);
-        txtWarningdate = findViewById(R.id.txtWarningdate);
+
 
     }
 
@@ -149,15 +146,7 @@ public class AddCourseActivity extends AppCompatActivity {
         if(instructor.isEmpty()){
             txtWarningDr.setVisibility(View.VISIBLE);
         }
-        if(startTime.isEmpty()){
-            txtWarningStartTime.setVisibility(View.VISIBLE);
-        }
-        if(endTime.isEmpty()){
-            txtWarningEndTime.setVisibility(View.VISIBLE);
-        }
-        if(date.isEmpty()){
-            txtWarningdate.setVisibility(View.VISIBLE);
-        }
+
         else {
             addToBackEnd(LoginActivity.id, courseid, instructor);
         }

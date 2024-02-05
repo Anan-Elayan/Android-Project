@@ -132,8 +132,8 @@
 
             <ImageButton
                 android:id="@+id/btnCalender"
-                android:layout_width="46dp"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="53dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"
@@ -171,8 +171,8 @@
 
             <ImageButton
                 android:id="@+id/btnClock"
-                android:layout_width="57dp"
-                android:layout_height="52dp"
+                android:layout_width="51dp"
+                android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"

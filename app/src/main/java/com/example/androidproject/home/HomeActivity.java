@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +49,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     private Course courseDetails;
 
     public String id = LoginActivity.id;
+    public static ConstraintLayout constraintHome;
+    TextView textView;
 
 
     @Override
@@ -57,6 +61,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.activity_home);
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
         meowBottomNavigation = findViewById(R.id.butonNavegation);
+        constraintHome = findViewById(R.id.constraintHome);
+        textView = findViewById(R.id.textView);
         setupBottomNavigation();
         setupCourses();
         //setupRecyclerView();

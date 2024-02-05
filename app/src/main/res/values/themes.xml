@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.AndroidProject" parent="Base.Theme.AndroidProject" />
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/black</item>
+    </style>
 </resources>
