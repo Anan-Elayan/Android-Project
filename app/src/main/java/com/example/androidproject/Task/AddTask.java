@@ -1,12 +1,15 @@
 package com.example.androidproject.Task;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +52,11 @@ public class AddTask extends AppCompatActivity {
     private Button btnAddTask;
     String id = LoginActivity.id;
     Course course;
-   // public  static  int countTasks = 1 ;
+
+    private SharedPreferences prefs;
+    ConstraintLayout constraintLayout;
+
+    // public  static  int countTasks = 1 ;
 
 
     @Override
@@ -119,6 +126,9 @@ public class AddTask extends AppCompatActivity {
             }
         });
 
+        setupSharedPrefs();
+        ColorMode();
+
     }
 
     public void setupViews() {
@@ -134,6 +144,8 @@ public class AddTask extends AppCompatActivity {
         txtWarningDescription = findViewById(R.id.txtWarningDescription);
         txtWarningTime = findViewById(R.id.txtWarningTime);
         txtWarningDate = findViewById(R.id.txtWarningDate);
+        constraintLayout = findViewById(R.id.constraintLayout);
+
     }
 
     public void AddNewTask(View view) {
@@ -260,6 +272,36 @@ public class AddTask extends AppCompatActivity {
                 }
         );
         queue.add(request);
+    }
+
+
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+
+    private void ColorMode() {
+        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
+        if (dark_mode) {
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+            txtCourseName.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextTitle.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextTitle.setHintTextColor(getResources().getColor(R.color.white));
+
+            textInputEditTextDescription.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextDescription.setHintTextColor(getResources().getColor(R.color.white));
+
+
+            textInputEditTextDate.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextDate.setHintTextColor(getResources().getColor(R.color.white));
+
+            textInputEditTextTime.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextTime.setHintTextColor(getResources().getColor(R.color.white));
+
+            btnCalender.setImageResource(R.drawable.light_calender);
+            btnClock.setImageResource(R.drawable.light_clock);
+
+        }
     }
 
 

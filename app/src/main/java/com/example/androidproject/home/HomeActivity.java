@@ -1,9 +1,11 @@
 package com.example.androidproject.home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -50,7 +52,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     public String id = LoginActivity.id;
     public static ConstraintLayout constraintHome;
-    TextView textView;
+    private SharedPreferences prefs;
+    TextView textViewMyCourses;
 
 
     @Override
@@ -62,9 +65,11 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
         meowBottomNavigation = findViewById(R.id.butonNavegation);
         constraintHome = findViewById(R.id.constraintHome);
-        textView = findViewById(R.id.textView);
+        textViewMyCourses = findViewById(R.id.textViewMyCourses);
         setupBottomNavigation();
         setupCourses();
+        setupSharedPrefs();
+        ColorMode();
         //setupRecyclerView();
 
     }
@@ -273,5 +278,19 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     public void action(View view) {
         //setupRecyclerView();
+    }
+
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+
+
+    private void ColorMode(){
+        boolean dark_mode = prefs.getBoolean("DARK MODE",false);
+        if(dark_mode){
+            constraintHome.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+            textViewMyCourses.setTextColor(getResources().getColor(R.color.white));
+        }
     }
 }

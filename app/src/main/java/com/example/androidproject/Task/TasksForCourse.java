@@ -3,13 +3,16 @@ package com.example.androidproject.Task;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -45,18 +48,25 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     private TextView lblCourseid;
     Course course;
 
+    ConstraintLayout constraintLayout;
+    private SharedPreferences prefs;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_for_course); // Move this line here
         taskList = new ArrayList<>();
         recyclerViewTasks = findViewById(R.id.recyclerView);
+        constraintLayout = findViewById(R.id.constraintLayout);
 
         Intent intent = getIntent();
         course = (Course) intent.getSerializableExtra("course");
 
         lblCourseid = findViewById(R.id.lblCourseid);
         lblCourseid.setText("Tasks for " + course.getCourseID());
+        setupSharedPrefs();
+        ColorMode();
 
     }
 
@@ -65,6 +75,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         super.onStart();
         setupTasks();
        // setupRecyclerView();
+
     }
 
     public void AddNewTask(View view) {
@@ -232,4 +243,18 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     public void showTasks(View view) {
        // setupRecyclerView();
     }
+
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+    private void ColorMode(){
+        boolean dark_mode = prefs.getBoolean("DARK MODE",false);
+        if(dark_mode){
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+            lblCourseid.setTextColor(getResources().getColor(R.color.white));
+
+        }
+    }
+
 }

@@ -1,211 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Task.AddTask">
 
-    <ImageView
-        android:id="@+id/imageViewBottom"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/path"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <ImageView
-        android:id="@+id/imageViewTop"
-        android:layout_width="425dp"
-        android:layout_height="220dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/top_path"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166" />
-
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/un"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
-        app:layout_constraintEnd_toEndOf="@id/imageViewTop"
-        app:layout_constraintStart_toStartOf="@id/imageViewTop"
-        app:layout_constraintTop_toTopOf="@id/imageViewTop" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewBottom">
+        android:background="#FFFFFF">
 
-        <TextView
-            android:id="@+id/txtCourseName"
-            android:layout_width="305dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="60dp"
-            android:text="COMP336-Add Task"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
+        <ImageView
+            android:id="@+id/imageViewBottom"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginRight="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/path"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="351dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextTitle"
+        <ImageView
+            android:id="@+id/imageViewTop"
+            android:layout_width="433dp"
+            android:layout_height="215dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/top_path"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.125" />
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/un"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
+            app:layout_constraintEnd_toEndOf="@id/imageViewTop"
+            app:layout_constraintStart_toStartOf="@id/imageViewTop"
+            app:layout_constraintTop_toTopOf="@id/imageViewTop" />
+
+        <ScrollView
+            android:layout_width="406dp"
+            android:layout_height="608dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewBottom">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Title" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtWarningTitle"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:text="لو سحمت ادخل عنوان المهمة"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/holo_red_dark"
-            android:visibility="invisible" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="348dp"
-            android:layout_height="106dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextDescription"
-                android:layout_width="match_parent"
-                android:layout_height="96dp"
-                android:hint="Description" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/txtWarningDescription"
-            android:layout_width="174dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:text="لو سمحت ادخل وصف المهمة"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/holo_red_dark"
-            android:visibility="invisible" />
-
-        <LinearLayout
-            android:layout_width="367dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="285dp"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextDate"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/txtCourseName"
+                    android:layout_width="305dp"
                     android:layout_height="wrap_content"
-                    android:hint="Date" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="COMP336-Add Task"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
 
-            <ImageButton
-                android:id="@+id/btnCalender"
-                android:layout_width="50dp"
-                android:layout_height="53dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/calendar_alt" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="351dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp">
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Title" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/txtWarningDate"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:text="لو سمحت ادخل تاريخ المهمة"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/holo_red_dark"
-            android:visibility="invisible" />
-
-        <LinearLayout
-            android:layout_width="367dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="285dp"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextTime"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/txtWarningTitle"
+                    android:layout_width="175dp"
                     android:layout_height="wrap_content"
-                    android:hint="Time" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginLeft="20dp"
+                    android:text="لو سحمت ادخل عنوان المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
 
-            <ImageButton
-                android:id="@+id/btnClock"
-                android:layout_width="51dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/clock" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="348dp"
+                    android:layout_height="106dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp">
 
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="96dp"
+                        android:hint="Description" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/txtWarningTime"
-            android:layout_width="172dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:text="لو سمحنت ادخل وقت المهمة"
-            android:textAlignment="viewStart"
-            android:textColor="@android:color/holo_red_dark"
-            android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/txtWarningDescription"
+                    android:layout_width="174dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="لو سمحت ادخل وصف المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="271dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="0dp" />
+                <LinearLayout
+                    android:layout_width="367dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnUpdateTask"
-            style="@style/styleButton"
-            android:layout_width="363dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:onClick="AddNewTask"
-            android:text="Add Tasks" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="285dp"
+                        android:layout_height="match_parent">
 
-    </LinearLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:hint="Date" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageButton
+                        android:id="@+id/btnCalender"
+                        android:layout_width="50dp"
+                        android:layout_height="53dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/calendar_alt" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningDate"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="لو سمحت ادخل تاريخ المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="367dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="285dp"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:hint="Time" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnClock"
+                        android:layout_width="51dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/clock" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningTime"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="لو سمحنت ادخل وقت المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="271dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="0dp" />
+
+                <Button
+                    android:id="@+id/btnUpdateTask"
+                    style="@style/styleButton"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="60dp"
+                    android:onClick="AddNewTask"
+                    android:text="Add Tasks" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

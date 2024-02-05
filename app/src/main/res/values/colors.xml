@@ -6,6 +6,9 @@
     <color name="textFieldBackGround">#EDEDED</color>
     <color name="iconColorNavigation">#3c415e</color>
     <color name="whitedark">#E8F3F1</color>
+    <color name="myColor">#006325</color>
+    <color name="blackModeColor">#1A1D21</color>
+    <color name="statusBar">#006325</color>
 
 
     <color name="background">#F0F4F3</color>

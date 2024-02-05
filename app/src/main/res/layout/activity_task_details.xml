@@ -1,178 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Task.TaskDetails">
 
-    <ImageView
-        android:id="@+id/imageViewBottom"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/path"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
 
-
-    <ImageView
-        android:id="@+id/imageViewTop"
-        android:layout_width="425dp"
-        android:layout_height="220dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/top_path"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
-
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/un"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
-        app:layout_constraintEnd_toEndOf="@id/imageViewTop"
-        app:layout_constraintStart_toStartOf="@id/imageViewTop"
-        app:layout_constraintTop_toTopOf="@id/imageViewTop" />
-
-    <ScrollView
-            android:layout_width="413dp"
-            android:layout_height="568dp"
+        <ImageView
+            android:id="@+id/imageViewBottom"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginRight="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/path"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/imageViewTop"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/top_path"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/un"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
+            app:layout_constraintEnd_toEndOf="@id/imageViewTop"
+            app:layout_constraintStart_toStartOf="@id/imageViewTop"
+            app:layout_constraintTop_toTopOf="@id/imageViewTop" />
+
+        <ScrollView
+            android:layout_width="410dp"
+            android:layout_height="571dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewTop">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical" android:layout_height="match_parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                <TextView
+                    <TextView
                         android:id="@+id/lblCourse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="15dp"
                         android:layout_weight="1"
                         android:text="COMP336"
                         android:textColor="@color/black"
-                        android:textSize="25dp"/>
+                        android:textSize="25dp" />
 
-            </LinearLayout>
-            <com.google.android.material.textfield.TextInputLayout
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="351dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Title" android:id="@+id/txtTitle"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                        android:hint="Title" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="348dp"
                     android:layout_height="108dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="96dp"
-                        android:hint="Description" android:id="@+id/txtDescription"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                        android:hint="Description" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="367dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
                     android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="285dp"
                         android:layout_height="match_parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtdate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Deta" android:id="@+id/txtdate"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                            android:editable="false"
+                            android:hint="Dete" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
+                    <ImageButton
                         android:id="@+id/btnCalender"
                         android:layout_width="46dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/calendar_alt"/>
+                        android:src="@drawable/calendar_alt" />
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
+                <LinearLayout
                     android:layout_width="367dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_height="74dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="25dp"
                     android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="285dp"
                         android:layout_height="match_parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/txtTime" android:hint="Time"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                            android:editable="false"
+                            android:hint="Time" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
+                    <ImageButton
                         android:id="@+id/btnClock"
                         android:layout_width="57dp"
                         android:layout_height="52dp"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/clock"/>
+                        android:src="@drawable/clock" />
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btnUpdateTask"
-                android:layout_width="118dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="130dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@android:color/transparent"
-                android:onClick="actionUpdate"
-                app:srcCompat="@drawable/feather_edit" />
+                <ImageButton
+                    android:id="@+id/btnUpdateTask"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="135dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:onClick="actionUpdate"
+                    app:srcCompat="@drawable/feather_edit" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="271dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="0dp"/>
+                    android:layout_marginTop="0dp" />
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>

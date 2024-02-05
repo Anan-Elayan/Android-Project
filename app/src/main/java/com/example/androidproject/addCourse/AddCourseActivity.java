@@ -1,9 +1,12 @@
 package com.example.androidproject.addCourse;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,10 +58,11 @@ public class AddCourseActivity extends AppCompatActivity {
 
     TextView txtWarningCourseID;
     TextView txtWarningDr;
-
+    private SharedPreferences prefs;
     Button btnAdd;
     Intent intent;
     ArrayList<Course>courseIDToSpinner;
+    ConstraintLayout constraintLayout;
 
 
     @Override
@@ -79,7 +83,8 @@ public class AddCourseActivity extends AppCompatActivity {
 
             }
         });
-
+        setupSharedPrefs();
+        ColorMode();
 
     }
 
@@ -90,6 +95,7 @@ public class AddCourseActivity extends AppCompatActivity {
         txtStartTime = findViewById(R.id.txtStartTime);
         txtEndTime = findViewById(R.id.txtEndTime);
         txtDate = findViewById(R.id.txtDate);
+        constraintLayout = findViewById(R.id.constraintLayout);
 
 
     }
@@ -282,6 +288,28 @@ public class AddCourseActivity extends AppCompatActivity {
                 txtEndTime.setText(courseIDToSpinner.get(i).getEndTime());
                 txtDate.setText(courseIDToSpinner.get(i).getDate());
             }
+        }
+    }
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+
+    private void ColorMode(){
+        boolean dark_mode = prefs.getBoolean("DARK MODE",false);
+        if(dark_mode){
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+
+            spinnerDr.setBackgroundColor(getResources().getColor(R.color.white));
+            spinnerCourse.setBackgroundColor(getResources().getColor(R.color.white));
+
+            txtStartTime.setTextColor(getResources().getColor(R.color.white));
+            txtEndTime.setTextColor(getResources().getColor(R.color.white));
+            txtDate.setTextColor(getResources().getColor(R.color.white));
+            txtEndTime.setHintTextColor(getResources().getColor(R.color.white));
+            txtStartTime.setHintTextColor(getResources().getColor(R.color.white));
+            txtDate.setHintTextColor(getResources().getColor(R.color.white));
+
         }
     }
 

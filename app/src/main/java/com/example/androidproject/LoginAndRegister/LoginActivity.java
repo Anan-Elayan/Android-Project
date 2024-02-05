@@ -13,10 +13,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,6 +52,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String id;
 
+    private ConstraintLayout constraintLayout;
+    private TextView welcome;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +62,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         studentID=findViewById(R.id.studentID);
         pass=findViewById(R.id.pass);
+        constraintLayout=findViewById(R.id.constraintLayout);
+        welcome=findViewById(R.id.welcome);
         remCh=findViewById(R.id.rememberMe);
         queue = Volley.newRequestQueue(this);
         LoadData();
         setupSharedPrefs();
+        ColorMode();
         checkRememberMe();
 
 
@@ -181,6 +189,19 @@ public class LoginActivity extends AppCompatActivity {
             studentID.setText(name);
             pass.setText(password);
             remCh.setChecked(true);
+        }
+    }
+
+    private void ColorMode(){
+        boolean dark_mode=prefs.getBoolean("DARK MODE",false);
+        if(dark_mode){
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+            welcome.setTextColor(getResources().getColor(R.color.white));
+            remCh.setTextColor(getResources().getColor(R.color.white));
+            studentID.setTextColor(getResources().getColor(R.color.white));
+            studentID.setHintTextColor(getResources().getColor(R.color.white));
+            pass.setTextColor(getResources().getColor(R.color.white));
+            pass.setHintTextColor(getResources().getColor(R.color.white));
         }
     }
 }

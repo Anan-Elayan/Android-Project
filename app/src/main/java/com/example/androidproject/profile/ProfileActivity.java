@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -64,8 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
     String id = LoginActivity.id;
     boolean flag;
 
-    private SharedPreferences preferences;
-
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
 
     @Override
@@ -77,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
         setupViews();
         bottomNavigationSetUp();
         setupUserInfo(id);
+        setupSharedPrefs();
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         setupTheam();
+        setupMode();
+
 
 
     }
@@ -96,22 +100,35 @@ public class ProfileActivity extends AppCompatActivity {
                 // Change background color based on switch state
                 if (isChecked) {
 
-                    constraintLayout.setBackgroundColor(getResources().getColor(R.color.black));
-                    HomeActivity.constraintHome.setBackgroundColor(getResources().getColor(R.color.black));
+                    constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+                    //  HomeActivity.constraintHome.setBackgroundColor(getResources().getColor(R.color.black));
                     txtWelcomeMessage.setTextColor(getResources().getColor(R.color.white));
                     textInputEditTextEmail.setTextColor(getResources().getColor(R.color.white));
                     textInputEditTextPassword.setTextColor(getResources().getColor(R.color.white));
+
+                    editor.putBoolean("DARK MODE", true);
+                    editor.commit();
+
                 } else {
                     constraintLayout.setBackgroundColor(getResources().getColor(R.color.white));
-                    HomeActivity.constraintHome.setBackgroundColor(getResources().getColor(R.color.white));
-                    txtWelcomeMessage.setTextColor(getResources().getColor(R.color.black));
-                    textInputEditTextEmail.setTextColor(getResources().getColor(R.color.black));
-                    textInputEditTextPassword.setTextColor(getResources().getColor(R.color.black));
+                    // HomeActivity.constraintHome.setBackgroundColor(getResources().getColor(R.color.white));
+                    txtWelcomeMessage.setTextColor(getResources().getColor(R.color.blackModeColor));
+                    textInputEditTextEmail.setTextColor(getResources().getColor(R.color.blackModeColor));
+                    textInputEditTextPassword.setTextColor(getResources().getColor(R.color.blackModeColor));
+                    editor.putBoolean("DARK MODE", false);
+                    editor.commit();
                 }
             }
         });
 
     }
+
+    public void setupMode(){
+        boolean flag = prefs.getBoolean("DARK MODE", false);
+
+        switchMode.setChecked(flag);
+    }
+
 
 
 
@@ -140,8 +157,6 @@ public class ProfileActivity extends AppCompatActivity {
                             Glide.with(ProfileActivity.this)
                                     .load(Uri.parse(urlImage))
                                     .into(userImg);
-
-
                             System.out.println("Email" + studentEmail);
 
                             txtWelcomeMessage.setText("Hello " + studentName);
@@ -275,5 +290,10 @@ public class ProfileActivity extends AppCompatActivity {
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent1);
         finish();
+    }
+
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
     }
 }

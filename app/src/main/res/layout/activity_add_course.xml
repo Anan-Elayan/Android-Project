@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".addCourse.AddCourseActivity">
@@ -59,7 +60,7 @@
         app:mbn_circleColor="@color/white"
         app:mbn_rippleColor="@color/iconColorNavigation"
         app:mbn_selectedIconColor="@color/black"
-        tools:ignore="MissingConstraints" >
+        tools:ignore="MissingConstraints">
 
     </com.etebarian.meowbottomnavigation.MeowBottomNavigation>
 
@@ -99,6 +100,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
+        style="@style/textfieldsstyls"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -111,11 +113,13 @@
             android:id="@+id/txtStartTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:hint="Start Time" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout6"
+        style="@style/textfieldsstyls"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -127,10 +131,12 @@
             android:id="@+id/txtEndTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:hint="End Time" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/textfieldsstyls"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -142,6 +148,7 @@
             android:id="@+id/txtDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:hint="Date" />
     </com.google.android.material.textfield.TextInputLayout>
 

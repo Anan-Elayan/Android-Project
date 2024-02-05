@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.widget.DatePicker;
@@ -23,9 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.R;
-import com.example.androidproject.home.HomeActivity;
 import com.example.androidproject.model.Task;
-import com.example.androidproject.profile.ProfileActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -47,7 +48,8 @@ public class TaskDetails extends AppCompatActivity {
     private ImageButton btnClock;
     private ImageButton btnCalender;
     private TextView lblCourse;
-
+    private SharedPreferences prefs;
+    ConstraintLayout constraintLayout;
 
 
     @Override
@@ -56,7 +58,7 @@ public class TaskDetails extends AppCompatActivity {
         setContentView(R.layout.activity_task_details);
         Intent intent = getIntent();
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-             task = intent.getSerializableExtra("task",Task.class);
+            task = intent.getSerializableExtra("task", Task.class);
         }
         setupViews();
         btnClock.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +118,13 @@ public class TaskDetails extends AppCompatActivity {
         });
 
         setData();
+
+        setupSharedPrefs();
+        ColorMode();
     }
 
 
-    public void setupViews(){
+    public void setupViews() {
         txtTitle = findViewById(R.id.txtTitle);
         txtDescription = findViewById(R.id.txtDescription);
         txtDate = findViewById(R.id.txtdate);
@@ -128,9 +133,10 @@ public class TaskDetails extends AppCompatActivity {
         btnUpdateTask = findViewById(R.id.btnUpdateTask);
         btnCalender = findViewById(R.id.btnCalender);
         lblCourse = findViewById(R.id.lblCourse);
+        constraintLayout = findViewById(R.id.constraintLayout);
     }
 
-    public void setData(){
+    public void setData() {
         txtTitle.setText(task.getTaskTitle());
         txtDescription.setText(task.getTaskDescription());
         txtDate.setText(task.getTaskDate());
@@ -139,12 +145,10 @@ public class TaskDetails extends AppCompatActivity {
     }
 
 
-
-
     public void actionUpdate(View view) {
         String url = "http://10.0.2.2:5000/updateTasks/" + task.getCourseID() + "/" + txtTitle.getText().toString() + "/" +
-                txtDescription.getText().toString() + "/"+ txtTime.getText().toString()+"/"+txtDate.getText().toString()+"/"
-                +task.getStudentID()+"/"+task.getTaskID() ;
+                txtDescription.getText().toString() + "/" + txtTime.getText().toString() + "/" + txtDate.getText().toString() + "/"
+                + task.getStudentID() + "/" + task.getTaskID();
 
         RequestQueue queue = Volley.newRequestQueue(TaskDetails.this);
 
@@ -174,5 +178,38 @@ public class TaskDetails extends AppCompatActivity {
                 }
         );
         queue.add(request);
+    }
+
+
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+
+    private void ColorMode() {
+        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
+        if (dark_mode) {
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+            lblCourse.setTextColor(getResources().getColor(R.color.white));
+            txtTitle.setTextColor(getResources().getColor(R.color.white));
+            txtTitle.setHintTextColor(getResources().getColor(R.color.white));
+
+            txtDescription.setTextColor(getResources().getColor(R.color.white));
+            txtDescription.setHintTextColor(getResources().getColor(R.color.white));
+
+
+            txtDate.setTextColor(getResources().getColor(R.color.white));
+            txtDate.setHintTextColor(getResources().getColor(R.color.white));
+
+            txtTime.setTextColor(getResources().getColor(R.color.white));
+            txtTime.setHintTextColor(getResources().getColor(R.color.white));
+
+            btnCalender.setImageResource(R.drawable.light_calender);
+            btnClock.setImageResource(R.drawable.light_clock);
+
+
+
+
+        }
     }
 }
