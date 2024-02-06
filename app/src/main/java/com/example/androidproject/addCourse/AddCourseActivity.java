@@ -300,8 +300,6 @@ public class AddCourseActivity extends AppCompatActivity {
         if(dark_mode){
             constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
 
-            spinnerDr.setBackgroundColor(getResources().getColor(R.color.white));
-            spinnerCourse.setBackgroundColor(getResources().getColor(R.color.white));
 
             txtStartTime.setTextColor(getResources().getColor(R.color.white));
             txtEndTime.setTextColor(getResources().getColor(R.color.white));

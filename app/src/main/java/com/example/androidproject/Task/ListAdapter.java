@@ -36,17 +36,20 @@ public class ListAdapter extends ArrayAdapter<Task> {
     private int mResource;
 
     private ImageButton imageButton;
+    private ArrayList<Task>listData;
+
     public ListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Task> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
+        this.listData = objects;
     }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         convertView = layoutInflater.inflate(mResource, parent, false);
-        final Task item = getItem(position);
+        Task item = getItem(position);
         if (convertView == null) {
             convertView = layoutInflater.inflate(mResource, parent, false);
         }
@@ -60,9 +63,39 @@ public class ListAdapter extends ArrayAdapter<Task> {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListAdapter.this.getContext());
-                builder.setMessage("Are you sure you want to delete this course ?");
+                builder.setMessage("Are you sure you want to delete this task ?");
                 builder.setPositiveButton("Yes", (dialog, which) -> {
+                    String url = "http://10.0.2.2:5000/deleteTask/" + item.getTaskID();
+                    RequestQueue queue = Volley.newRequestQueue(ListAdapter.this.getContext());
 
+                    // Create a JsonObjectRequest with PUT method
+                    JsonObjectRequest request = new JsonObjectRequest(
+                            Request.Method.DELETE,
+                            url,
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        // Handle the response as needed
+                                        String message = response.getString("message");
+                                        Toast.makeText(ListAdapter.this.getContext(), message, Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        Log.e("JSONException", e.toString());
+                                        e.printStackTrace();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.e("VolleyError", error.toString());
+                                }
+                            }
+                    );
+                    queue.add(request);
+                    listData.remove(position);
+                    notifyDataSetChanged();
                 });
                 builder.setNegativeButton("No", (dialog, which) -> {
 

@@ -7,50 +7,51 @@
     android:background="#FFFFFF"
     tools:context=".LoginAndRegister.Register"
     tools:ignore="ExtraText">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        >
+        android:background="#FFFFFF">
 
         <ImageView
-        android:id="@+id/imageViewBottom"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/path"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/imageViewBottom"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginRight="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/path"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/imageViewTop"
-        android:layout_width="wrap_content"
-        android:layout_height="240dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/top_path"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/top_path"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/un"
-        app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
-        app:layout_constraintEnd_toEndOf="@id/imageViewTop"
-        app:layout_constraintStart_toStartOf="@id/imageViewTop"
-        app:layout_constraintTop_toTopOf="@id/imageViewTop" />
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/un"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewTop"
+            app:layout_constraintEnd_toEndOf="@id/imageViewTop"
+            app:layout_constraintStart_toStartOf="@id/imageViewTop"
+            app:layout_constraintTop_toTopOf="@id/imageViewTop" />
 
 
         <ScrollView
@@ -106,19 +107,16 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputLayoutPassword"
-                        android:layout_width="363dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="24dp">
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextStudetnID"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Student ID"
-                            android:inputType="number|numberDecimal"
-                            android:maxLength="20" />
+                            android:hint="Stdent ID"
+                            android:inputType="number|numberDecimal" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,11 +138,9 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputLayout4"
-                        android:layout_width="363dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="24dp">
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextName"
@@ -173,11 +169,9 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputLayout2"
-                        android:layout_width="363dp"
-                        android:layout_height="53dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="24dp">
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextEmail"
@@ -205,11 +199,9 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputLayout3"
-                        android:layout_width="342dp"
-                        android:layout_height="44dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="24dp">
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextPassword"

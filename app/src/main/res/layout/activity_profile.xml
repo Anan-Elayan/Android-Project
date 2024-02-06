@@ -83,7 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="275dp"
-                android:text="Dark Mode" />
+                android:track="@drawable/track"
+                android:thumb="@drawable/thumb"
+                />
 
             <TextView
                 android:id="@+id/txtWelcomMessage"

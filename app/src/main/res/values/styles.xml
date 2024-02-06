@@ -27,7 +27,7 @@
         <item name="android:layout_width">270dp</item>
         <item name="android:layout_height">47dp</item>
 
-<!--        <item name="android:background">@color/white</item>-->
+        <!--        <item name="android:background">@color/white</item>-->
         <item name="backgroundTint">#145510</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
@@ -38,7 +38,7 @@
         <item name="android:layout_height">47dp</item>
         <item name="android:layout_marginBottom">62dp</item>
         <item name="android:background">@drawable/shapebtn</item>
-<!--        <item name="backgroundTint">#248D1D</item>-->
+        <!--        <item name="backgroundTint">#248D1D</item>-->
         <item name="android:textColor">#248D1D</item>
         <item name="android:textSize">16sp</item>
     </style>
@@ -58,6 +58,25 @@
         <item name="android:layout_marginBottom">35dp</item>
     </style>
 
+    <style name="Regtextfieldsstyls">
+        <item name="android:layout_width">368dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <!--        <item name="android:layout_marginBottom">35dp</item>-->
+    </style>
 
+    <style name="CustomSpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/shapebtn</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:popupBackground">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="CustomSpinnerStyle1" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner1_background</item>
+        <!-- Add other style properties here -->
+    </style>
 
 </resources>

@@ -67,11 +67,9 @@
     <Button
         android:id="@+id/btnAdd"
         style="@style/styleButton"
-        android:layout_width="149dp"
-        android:layout_height="40dp"
         android:layout_marginStart="162dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         android:onClick="actionAdd"
         android:text="Add"
         android:textAlignment="center"
@@ -81,6 +79,7 @@
 
     <Spinner
         android:id="@+id/spinnerCourse"
+        style="@style/CustomSpinnerStyle1"
         android:layout_width="377dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
@@ -90,6 +89,7 @@
 
     <Spinner
         android:id="@+id/spinnerDr"
+        style="@style/CustomSpinnerStyle1"
         android:layout_width="373dp"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"

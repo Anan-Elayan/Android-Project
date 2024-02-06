@@ -2,10 +2,14 @@ package com.example.androidproject.LoginAndRegister;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -44,13 +48,19 @@ public class Register extends AppCompatActivity {
     private TextView txtWarningEmail;
     private TextView txtWarningPassword;
     private TextView txtWarningImage;
+    private ConstraintLayout constraintLayout;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        constraintLayout=findViewById(R.id.constraintLayout);
         setupViews();
+        setupSharedPrefs();
+        ColorMode();
         regesterImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,6 +224,18 @@ public class Register extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "اختر صورة الحساب 🥰"), CHOOSE_IMAGE);
+    }
+
+    private void setupSharedPrefs() {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+    }
+
+    private void ColorMode() {
+        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
+        if (dark_mode) {
+            constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+        }
     }
 
 }
