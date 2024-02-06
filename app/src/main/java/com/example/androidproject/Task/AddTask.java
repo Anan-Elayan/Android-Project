@@ -50,13 +50,9 @@ public class AddTask extends AppCompatActivity {
     private ImageButton btnClock;
     private ImageButton btnCalender;
     private Button btnAddTask;
-    String id = LoginActivity.id;
     Course course;
-
     private SharedPreferences prefs;
     ConstraintLayout constraintLayout;
-
-    // public  static  int countTasks = 1 ;
 
 
     @Override
@@ -152,7 +148,7 @@ public class AddTask extends AppCompatActivity {
         String title = textInputEditTextTitle.getText().toString();
         String description = textInputEditTextDescription.getText().toString();
         String time = textInputEditTextTime.getText().toString();
-        
+
         String oldDate = textInputEditTextDate.getText().toString();
 
         if (title.isEmpty()) {
@@ -223,55 +219,9 @@ public class AddTask extends AppCompatActivity {
                     }
             );
             queue.add(request);
-        }
-    }
-
-    public void insertIntoCourseTaskTable(String courseID, int taskID) {
-        String url = "http://10.0.2.2:5000/insertIntoCourseTasks/" + courseID + "/" + taskID;
-        RequestQueue queue = Volley.newRequestQueue(AddTask.this);
-
-        JSONObject jsonParams = new JSONObject();
-        try {
-            jsonParams.put("courseID", courseID);
-            jsonParams.put("taskTitle", taskID);
-
-
-        } catch (JSONException e) {
-            System.out.println("catch 1");
-            e.printStackTrace();
+            finish();
         }
 
-        // Create a JsonObjectRequest with POST method
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                jsonParams,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String str = "";
-                        try {
-                            System.out.println("try");
-                            str = response.getString("result");
-                        } catch (JSONException e) {
-                            System.out.println("catch 2");
-                            System.out.println(e.toString());
-                            e.printStackTrace();
-                        }
-
-                        Toast.makeText(AddTask.this, str, Toast.LENGTH_SHORT).show();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("error");
-                        Log.d("VolleyError", error.toString());
-                    }
-                }
-        );
-        queue.add(request);
     }
 
 

@@ -92,7 +92,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="فش عندك مواد يا مسخم😒"
+        android:text="فش عندك مواد شكله😒"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerViewCourses"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewCourses"

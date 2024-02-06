@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +24,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.androidproject.R;
 import com.example.androidproject.model.Task;
+import com.example.androidproject.profile.ProfileActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,9 +41,7 @@ import java.util.Locale;
 
 public class TaskDetails extends AppCompatActivity {
 
-
     Task task;
-
     TextInputEditText txtTitle;
     TextInputEditText txtDescription;
     TextInputEditText txtDate;
@@ -50,6 +52,7 @@ public class TaskDetails extends AppCompatActivity {
     private TextView lblCourse;
     private SharedPreferences prefs;
     ConstraintLayout constraintLayout;
+    private String taskID;
 
 
     @Override
@@ -57,10 +60,13 @@ public class TaskDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
         Intent intent = getIntent();
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            task = intent.getSerializableExtra("task", Task.class);
-        }
+        taskID = intent.getStringExtra("taskID");
         setupViews();
+
+        System.out.println("taskIDdddddd" + taskID);
+        getTask();
+
+
         btnClock.setOnClickListener(new View.OnClickListener() {
             int hour = 0, minutes = 0;
 
@@ -117,7 +123,6 @@ public class TaskDetails extends AppCompatActivity {
             }
         });
 
-        setData();
 
         setupSharedPrefs();
         ColorMode();
@@ -137,6 +142,7 @@ public class TaskDetails extends AppCompatActivity {
     }
 
     public void setData() {
+        System.out.println("setData" + task);
         txtTitle.setText(task.getTaskTitle());
         txtDescription.setText(task.getTaskDescription());
         txtDate.setText(task.getTaskDate());
@@ -181,14 +187,90 @@ public class TaskDetails extends AppCompatActivity {
     }
 
 
-    private void setupSharedPrefs() {
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    public void getTask() {
+        String url = "http://10.0.2.2:5000/getTask/" + taskID;
+        System.out.println("test");
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        String studentID = obj.getString("studentID");
+                        String CourseID = obj.getString("CourseID");
+                        String taskDate = obj.getString("taskDate");
+                        String taskDescription = obj.getString("taskDescription");
+                        String taskTime = obj.getString("taskTime");
+                        String taskTitle = obj.getString("taskTitle");
+                        String taskID = obj.getString("taskID");
+
+                        task = new Task(studentID, CourseID, taskTitle, taskDescription, taskDate, taskTime, taskID);
+                        System.out.println("task--> " + task.toString());
+                        setData();
+
+                    } catch (JSONException exception) {
+                        Log.d("Error", exception.toString());
+                    }
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(TaskDetails.this, error.toString(),
+                        Toast.LENGTH_SHORT).show();
+                Log.d("Error_json", error.toString());
+            }
+        });
+        queue.add(request);
+
+    }
+
+    public void DeleteTaskAction(View view) {
+        String url = "http://10.0.2.2:5000/deleteTask/" + task.getTaskID();
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        // Create a JsonObjectRequest with PUT method
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            // Handle the response as needed
+                            String message = response.getString("message");
+                            Toast.makeText(TaskDetails.this, message, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e("JSONException", e.toString());
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("VolleyError", error.toString());
+                    }
+                }
+        );
+        queue.add(request);
+        finish();
     }
 
 
-    private void ColorMode() {
-        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
-        if (dark_mode) {
+    private void setupSharedPrefs(){
+        prefs=PreferenceManager.getDefaultSharedPreferences(this);
+    }
+
+
+    private void ColorMode(){
+        boolean dark_mode=prefs.getBoolean("DARK MODE",false);
+        if(dark_mode){
             constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
             lblCourse.setTextColor(getResources().getColor(R.color.white));
             txtTitle.setTextColor(getResources().getColor(R.color.white));
@@ -206,8 +288,6 @@ public class TaskDetails extends AppCompatActivity {
 
             btnCalender.setImageResource(R.drawable.light_calender);
             btnClock.setImageResource(R.drawable.light_clock);
-
-
 
 
         }

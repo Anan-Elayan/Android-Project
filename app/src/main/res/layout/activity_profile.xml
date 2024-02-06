@@ -118,21 +118,34 @@
                 style="@style/textfieldsstyls"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email" />
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/txtEmailProfileEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:text="لو سمحت ادخل الايميل"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="invisible" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutPassword"
                 style="@style/textfieldsstyls"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInpuEditTextPassword"
@@ -141,29 +154,32 @@
                     android:hint="Password" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/txtWarningProfilePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="لو سمحت ادخل الرقم السري"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="invisible" />
+
             <Button
                 android:id="@+id/btnUpdate"
                 style="@style/styleButton"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="30dp"
                 android:text="Update" />
 
             <Button
                 android:id="@+id/btnLogOut"
                 style="@style/styleButton"
-                android:layout_width="220dp"
-                android:layout_height="44dp"
                 android:layout_gravity="center"
-                android:background="@drawable/shapbuttonlogout"
-                android:backgroundTint="@color/active"
                 android:gravity="center"
                 android:onClick="actionLogOut"
                 android:text="Log out"
-                android:textAlignment="center"
-                android:textColor="@color/background" />
+                android:textAlignment="center" />
 
         </LinearLayout>
     </ScrollView>

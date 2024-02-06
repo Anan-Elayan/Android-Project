@@ -68,21 +68,21 @@
         android:id="@+id/btnAdd"
         style="@style/styleButton"
         android:layout_marginStart="162dp"
+        android:layout_marginTop="38dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="32dp"
         android:onClick="actionAdd"
         android:text="Add"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/butonNavegation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
 
     <Spinner
         android:id="@+id/spinnerCourse"
         style="@style/CustomSpinnerStyle1"
         android:layout_width="377dp"
         android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTop" />
@@ -103,7 +103,7 @@
         style="@style/textfieldsstyls"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +122,7 @@
         style="@style/textfieldsstyls"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
@@ -136,6 +136,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout7"
         style="@style/textfieldsstyls"
         android:layout_width="373dp"
         android:layout_height="wrap_content"

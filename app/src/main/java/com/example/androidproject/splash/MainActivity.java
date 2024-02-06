@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout dotLayout;
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
-    int count =0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

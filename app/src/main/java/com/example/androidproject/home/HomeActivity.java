@@ -262,9 +262,10 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             courseAdapter.removeItem(position);
         });
 
-        builder.setNegativeButton("No", (dialog, which) -> {
+        builder.setNegativeButton("No-", (dialog, which) -> {
             // Do nothing or provide any specific action if needed
             // This will cancel the deletion operation
+            courseAdapter.notifyItemChanged(position);
         });
 
         AlertDialog alert = builder.create();
@@ -286,7 +287,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     private void setupSharedPrefs() {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
-
 
 
     private void ColorMode(){

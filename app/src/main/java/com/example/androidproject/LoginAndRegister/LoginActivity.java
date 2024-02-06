@@ -42,67 +42,72 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    private static final int CHOOSE_IMAGE = 101;
-    Button button;
     ArrayList<Student> studentList = new ArrayList<>();
     private RequestQueue queue;
     private EditText studentID;
     private EditText pass;
     private CheckBox remCh;
-
     public static String id;
-
     private ConstraintLayout constraintLayout;
     private TextView welcome;
+    private TextView txtWarningLoginStudentID;
+    private TextView txtWarningLoginPassword;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        studentID=findViewById(R.id.studentID);
-        pass=findViewById(R.id.pass);
-        constraintLayout=findViewById(R.id.constraintLayout);
-        welcome=findViewById(R.id.welcome);
-        remCh=findViewById(R.id.rememberMe);
-        queue = Volley.newRequestQueue(this);
+        setupViews();
         LoadData();
         setupSharedPrefs();
         ColorMode();
         checkRememberMe();
+    }
 
-
+    public void setupViews() {
+        studentID = findViewById(R.id.studentID);
+        pass = findViewById(R.id.pass);
+        constraintLayout = findViewById(R.id.constraintLayout);
+        welcome = findViewById(R.id.welcome);
+        remCh = findViewById(R.id.rememberMe);
+        txtWarningLoginStudentID = findViewById(R.id.txtWarningLoginStudentID);
+        txtWarningLoginPassword = findViewById(R.id.txtWarningLoginPassword);
+        queue = Volley.newRequestQueue(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // LoadData();
     }
 
     public void ActionLogin(View view) {
-
-
+        if(studentID.getText().toString().isEmpty()){
+            txtWarningLoginStudentID.setVisibility(View.VISIBLE);
+            return;
+        }if(pass.getText().toString().isEmpty()){
+            txtWarningLoginPassword.setVisibility(View.VISIBLE);
+            return;
+        }
         id = studentID.getText().toString();
-        int isExist= Check(); // to check the input data if exist or no
-        if(isExist==1){
+        int isExist = Check(); // to check the input data if exist or no
+        if (isExist == 1) {
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
 
             Toast.makeText(LoginActivity.this, "يا هلا و مرحبا، نورت 😁",
                     Toast.LENGTH_LONG).show();
-        }else if(isExist==0){
-            Toast.makeText(LoginActivity.this, "الرقم السري خطأ يا غالي 💔",
+            txtWarningLoginStudentID.setVisibility(View.INVISIBLE);
+            txtWarningLoginPassword.setVisibility(View.INVISIBLE);
+        } else {
+            Toast.makeText(LoginActivity.this, "  شو رأيك تسجل حساب عشان فش عندك حساب 😒",
                     Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(LoginActivity.this, "فش عنا حساب بهاض الرقم للاسف 😒",
-                    Toast.LENGTH_LONG).show();
+            txtWarningLoginStudentID.setVisibility(View.INVISIBLE);
+            txtWarningLoginPassword.setVisibility(View.INVISIBLE);
         }
 
         if (remCh.isChecked()) {
-            editor.putString("ID",studentID.getText().toString() );
+            editor.putString("ID", studentID.getText().toString());
             editor.putString("PASS", pass.getText().toString());
             editor.putBoolean("FLAG", true);
             editor.commit();
@@ -117,8 +122,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void LoadData() {
         String url = "http://10.0.2.2:5000//getStudent";
-
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
@@ -128,12 +131,11 @@ public class LoginActivity extends AppCompatActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
-                                String studentID= jsonObject.getString("studentID");
+                                String studentID = jsonObject.getString("studentID");
                                 String name = jsonObject.getString("studentName");
                                 String email = jsonObject.getString("studentEmail");
                                 String pass = jsonObject.getString("studentPassword");
                                 Student student = new Student(name, studentID, email, pass);
-                                System.out.println(student.toString());
                                 studentList.add(student);
 
                             } catch (JSONException e) {
@@ -142,30 +144,20 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle error
                     }
                 });
-
-
         queue.add(jsonArrayRequest);
     }
 
 
-
-    private int Check(){
-        System.out.println("U in check , the size of list is : "+studentList.size());
-        for(Student student:studentList){
-            System.out.println( "loop :>>>>"+student.toString());
-        }
-        String EditTxtID=studentID.getText().toString();
-        System.out.println( "loop :iddddd>>>>"+EditTxtID);
-        String EditTxtPass=pass.getText().toString();
-        for(Student student:studentList){
-            System.out.println("inside loop:<<<<"+student.toString());
-            if(student.getStudentID().equals(EditTxtID)) {
+    private int Check() {
+        String EditTxtID = studentID.getText().toString();
+        String EditTxtPass = pass.getText().toString();
+        for (Student student : studentList) {
+            if (student.getStudentID().equals(EditTxtID)) {
                 if (student.getPass().equals(EditTxtPass)) {
                     return 1;
                 }
@@ -182,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkRememberMe() {
         boolean flag = prefs.getBoolean("FLAG", false);
-
         if (flag) {
             String name = prefs.getString("ID", "");
             String password = prefs.getString("PASS", "");
@@ -192,9 +183,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void ColorMode(){
-        boolean dark_mode=prefs.getBoolean("DARK MODE",false);
-        if(dark_mode){
+    private void ColorMode() {
+        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
+        if (dark_mode) {
             constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
             welcome.setTextColor(getResources().getColor(R.color.white));
             remCh.setTextColor(getResources().getColor(R.color.white));

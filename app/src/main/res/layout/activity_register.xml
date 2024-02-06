@@ -72,9 +72,9 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/userImg"
                     android:layout_width="78dp"
-                    android:layout_height="75dp"
+                    android:layout_height="77dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/user1"
                     app:shapeAppearanceOverlay="@style/circular"
                     app:strokeColor="@color/whitedark"

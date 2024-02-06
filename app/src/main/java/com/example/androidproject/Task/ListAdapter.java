@@ -58,7 +58,7 @@ public class ListAdapter extends ArrayAdapter<Task> {
         TextView  txtTime = convertView.findViewById(R.id.textViewTaskTime);
         txtTime.setText (item.getTaskTime());
 
-        imageButton  = convertView.findViewById(R.id.imageButton);
+//        imageButton  = convertView.findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -20,13 +20,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.taskViewHold
     private List<Task> taskList;
     private static OnItemClickListener onItemClickListener;
 
-    public TasksAdapter(List<Task> taskList) {
-        this.taskList = taskList;
-    }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
-    }
 
     @NonNull
     @Override
@@ -49,10 +43,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.taskViewHold
         return taskList.size();
     }
 
-    public void removeItem(int position) {
-        taskList.remove(position);
-        notifyItemRemoved(position);
-    }
 
     public static class taskViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewTaskTitle, textViewTaskTime;
@@ -75,11 +65,5 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.taskViewHold
         }
     }
 
-    public Task getCourseAtPosition(int position) {
-        if (position >= 0 && position < taskList.size()) {
-            return taskList.get(position);
-        }
-        return null;
-    }
 }
 

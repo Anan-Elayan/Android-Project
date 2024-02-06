@@ -4,6 +4,7 @@ import android.database.DataSetObserver;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -40,23 +41,21 @@ import java.util.ArrayList;
 
 
 public class TasksForCourse extends AppCompatActivity implements OnItemClickListener  {
-    //    RecyclerView recyclerViewTasks;
-    ListView listViewTasks;
 
-    //    TasksAdapter adapter;
-    ListAdapter listAdapter;
+
+    ListView listViewTasks;
+    TaskListAdapter listAdapter;
     public ArrayList<Task> taskList;
-    private Task taskDetails;
     private TextView lblCourseid;
     Course course;
-
     ConstraintLayout constraintLayout;
-
     private SharedPreferences prefs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        System.out.println("First");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_for_course); // Move this line here
         taskList = new ArrayList<>();
@@ -90,14 +89,19 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
     private void setupListView() {
-        listAdapter = new ListAdapter(this,R.layout.list_row,taskList);
+        System.out.println("First");
+        listAdapter = new TaskListAdapter(TasksForCourse.this,taskList);
         listViewTasks.setAdapter(listAdapter);
+        System.out.println("second");
+
         listViewTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task selectedTask = taskList.get(position);
                 Intent intent = new Intent(TasksForCourse.this, TaskDetails.class);
-                intent.putExtra("task", selectedTask);
+                System.out.println("taskID 1"+selectedTask.getTaskID());
+                intent.putExtra("taskID", selectedTask.getTaskID());
                 startActivity(intent);
             }
         });
@@ -151,52 +155,6 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
 
-    private void showAlertForConfirmation(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to delete this course ?");
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-            String taskID = listAdapter.getItemByPosition(position).getTaskID();
-            String url = "http://10.0.2.2:5000/deleteTask/" + taskID;
-            RequestQueue queue = Volley.newRequestQueue(TasksForCourse.this);
-
-            // Create a JsonObjectRequest with PUT method
-            JsonObjectRequest request = new JsonObjectRequest(
-                    Request.Method.DELETE,
-                    url,
-                    null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                // Handle the response as needed
-                                String message = response.getString("message");
-                                Toast.makeText(TasksForCourse.this, message, Toast.LENGTH_SHORT).show();
-                            } catch (JSONException e) {
-                                Log.e("JSONException", e.toString());
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("VolleyError", error.toString());
-                        }
-                    }
-            );
-            queue.add(request);
-//            listAdapter.removeItem(position);
-        });
-
-        builder.setNegativeButton("No", (dialog, which) -> {
-            // Do nothing or provide any specific action if needed
-            // This will cancel the deletion operation
-        });
-
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
     @Override
     public void onItemClick(int position) {
         Task selectedCourse = taskList.get(position);
@@ -206,7 +164,6 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
     public void showTasks(View view) {
-        // setupRecyclerView();
     }
 
     private void setupSharedPrefs() {

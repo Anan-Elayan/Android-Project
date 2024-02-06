@@ -81,7 +81,9 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout4"
-                    style="@style/textfieldsstyls">
+                    style="@style/textfieldsstyls"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginBottom="7dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/studentID"
@@ -93,11 +95,24 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/txtWarningLoginStudentID"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="لو سمحت ادخل رقمك الجامعي"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout5"
+                    style="@style/textfieldsstyls"
                     android:layout_width="362dp"
                     android:layout_height="64dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="7dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pass"
@@ -106,6 +121,16 @@
                         android:hint="Password"
                         android:inputType="number|numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningLoginPassword"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="لو سمحت ادخل رقمك السري"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
 
                 <CheckBox
                     android:id="@+id/rememberMe"
@@ -123,7 +148,7 @@
                     android:layout_width="303dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginBottom="20dp"
                     android:onClick="ActionLogin"
                     android:paddingHorizontal="20dp"
@@ -137,7 +162,7 @@
                     android:layout_width="303dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="32dp"
                     android:onClick="ActionRegister"
                     android:text="SIGN UP" />

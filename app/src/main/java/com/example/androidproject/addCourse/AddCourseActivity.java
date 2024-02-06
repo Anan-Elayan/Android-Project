@@ -48,14 +48,11 @@ import kotlin.jvm.functions.Function1;
 public class AddCourseActivity extends AppCompatActivity {
 
     MeowBottomNavigation meowBottomNavigation;
-
     Spinner spinnerCourse;
     Spinner spinnerDr;
     TextInputEditText txtStartTime;
     TextInputEditText txtEndTime;
     TextInputEditText txtDate;
-
-
     TextView txtWarningCourseID;
     TextView txtWarningDr;
     private SharedPreferences prefs;
@@ -279,6 +276,7 @@ public class AddCourseActivity extends AppCompatActivity {
         spinnerDr.setAdapter(adapter);
     }
 
+
     public  void loadCourseDetails(){
         String selectedCourse = spinnerCourse.getSelectedItem().toString();
         String selectedDr = spinnerDr.getSelectedItem().toString();
@@ -290,6 +288,8 @@ public class AddCourseActivity extends AppCompatActivity {
             }
         }
     }
+
+
     private void setupSharedPrefs() {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }

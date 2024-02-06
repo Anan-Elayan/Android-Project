@@ -54,7 +54,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ShapeableImageView userImg;
     MeowBottomNavigation meowBottomNavigation;
     TextView txtWelcomeMessage;
-    Button btnEdit;
+    TextView txtEmailProfileEmail;
+    TextView txtWarningProfilePassword;
     Button btnUpdate;
     Button btnLogOut;
     TextInputEditText textInputEditTextEmail;
@@ -63,7 +64,6 @@ public class ProfileActivity extends AppCompatActivity {
     TextInputLayout textInputLayoutPassword;
     Intent intent;
     String id = LoginActivity.id;
-    boolean flag;
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -83,7 +83,15 @@ public class ProfileActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update(id, textInputEditTextEmail.getText().toString(), textInputEditTextPassword.getText().toString());
+                String email = textInputEditTextEmail.getText().toString();
+                String password = textInputEditTextPassword.getText().toString();
+                if(email.isEmpty()){
+                    txtEmailProfileEmail.setVisibility(View.VISIBLE);
+                }if(password.isEmpty()){
+                    txtWarningProfilePassword.setVisibility(View.VISIBLE);
+                }else {
+                    update(id, email, password);
+                }
             }
         });
         setupTheam();
@@ -131,9 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-
-
-
     private void setupUserInfo(String studentId) {
         String url = "http://10.0.2.2:5000/getStudent/" + studentId;
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
@@ -157,7 +162,6 @@ public class ProfileActivity extends AppCompatActivity {
                             Glide.with(ProfileActivity.this)
                                     .load(Uri.parse(urlImage))
                                     .into(userImg);
-                            System.out.println("Email" + studentEmail);
 
                             txtWelcomeMessage.setText("Hello " + studentName);
                             textInputEditTextEmail.setText(studentEmail);
@@ -211,7 +215,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }
         );
-
         queue.add(request);
     }
 
@@ -227,6 +230,9 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogOut = findViewById(R.id.btnLogOut);
         switchMode = findViewById(R.id.switchMode);
         constraintLayout = findViewById(R.id.constraintLayout);
+        txtEmailProfileEmail = findViewById(R.id.txtEmailProfileEmail);
+        txtWarningProfilePassword = findViewById(R.id.txtWarningProfilePassword);
+
     }
 
     private void bottomNavigationSetUp() {

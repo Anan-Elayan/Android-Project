@@ -75,10 +75,11 @@
                     android:textSize="25sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textfieldsstyls"
                     android:layout_width="351dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp">
+
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="7dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textInputEditTextTitle"
@@ -91,17 +92,18 @@
                     android:id="@+id/txtWarningTitle"
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="30dp"
                     android:text="لو سحمت ادخل عنوان المهمة"
                     android:textAlignment="viewStart"
                     android:textColor="@android:color/holo_red_dark"
                     android:visibility="invisible" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textfieldsstyls"
                     android:layout_width="348dp"
                     android:layout_height="106dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="7dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textInputEditTextDescription"
@@ -114,7 +116,7 @@
                     android:id="@+id/txtWarningDescription"
                     android:layout_width="174dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="30dp"
                     android:text="لو سمحت ادخل وصف المهمة"
                     android:textAlignment="viewStart"
                     android:textColor="@android:color/holo_red_dark"
@@ -125,11 +127,12 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="285dp"
-                        android:layout_height="match_parent">
+                        android:layout_height="64dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextDate"
@@ -165,11 +168,12 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="285dp"
-                        android:layout_height="match_parent">
+                        android:layout_height="64dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextTime"
@@ -212,7 +216,7 @@
                     android:layout_width="363dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="20dp"
                     android:onClick="AddNewTask"
                     android:text="Add Tasks" />
 
