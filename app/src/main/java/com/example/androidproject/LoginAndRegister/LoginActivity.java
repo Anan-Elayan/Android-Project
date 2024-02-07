@@ -99,7 +99,9 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             txtWarningLoginStudentID.setVisibility(View.INVISIBLE);
             txtWarningLoginPassword.setVisibility(View.INVISIBLE);
-        } else {
+        }
+
+        else {
             Toast.makeText(LoginActivity.this, "  شو رأيك تسجل حساب عشان فش عندك حساب 😒",
                     Toast.LENGTH_LONG).show();
             txtWarningLoginStudentID.setVisibility(View.INVISIBLE);
