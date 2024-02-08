@@ -109,14 +109,16 @@
                         android:id="@+id/textInputLayoutPassword"
                         style="@style/Regtextfieldsstyls"
                         android:layout_width="360dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/outline_assignment_ind_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextStudetnID"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Stdent ID"
-                            android:inputType="number|numberDecimal" />
+                            android:inputType="number|numberDecimal"
+                            android:paddingStart="48dp"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,14 +142,16 @@
                         android:id="@+id/textInputLayout4"
                         style="@style/Regtextfieldsstyls"
                         android:layout_width="360dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/outline_account_circle_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Name"
-                            android:inputType="text|textCapWords" />
+                            android:inputType="text|textCapWords"
+                            android:paddingStart="48dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -171,14 +175,16 @@
                         android:id="@+id/textInputLayout2"
                         style="@style/Regtextfieldsstyls"
                         android:layout_width="360dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/outline_email_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Email"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:paddingStart="48dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -201,14 +207,16 @@
                         android:id="@+id/textInputLayout3"
                         style="@style/Regtextfieldsstyls"
                         android:layout_width="360dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/sharp_lock_person_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Password"
-                            android:inputType="number|numberDecimal" />
+                            android:inputType="number|numberDecimal"
+                            android:paddingStart="48dp"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 

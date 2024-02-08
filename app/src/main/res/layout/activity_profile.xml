@@ -119,13 +119,15 @@
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:startIconDrawable="@drawable/outline_email_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email" />
+                    android:hint="Email"
+                    android:paddingStart="48dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,13 +147,15 @@
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                app:startIconDrawable="@drawable/sharp_lock_person_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInpuEditTextPassword"
                     android:layout_width="360dp"
                     android:layout_height="wrap_content"
-                    android:hint="Password" />
+                    android:hint="Password"
+                    android:paddingStart="48dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

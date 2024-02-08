@@ -79,13 +79,15 @@
                     android:layout_width="351dp"
 
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_marginBottom="7dp"
+                    app:startIconDrawable="@drawable/baseline_title_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textInputEditTextTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Title" />
+                        android:hint="Title"
+                        android:paddingStart="48dp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -103,13 +105,15 @@
                     android:layout_width="348dp"
                     android:layout_height="106dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_marginBottom="7dp"
+                    app:startIconDrawable="@drawable/baseline_add_task_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textInputEditTextDescription"
                         android:layout_width="match_parent"
                         android:layout_height="96dp"
-                        android:hint="Description" />
+                        android:hint="Description"
+                        android:paddingStart="48dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -132,14 +136,16 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="285dp"
-                        android:layout_height="64dp">
+                        android:layout_height="64dp"
+                        app:startIconDrawable="@drawable/baseline_date_range_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:editable="false"
-                            android:hint="Date" />
+                            android:hint="Date"
+                            android:paddingStart="48dp"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton
@@ -173,14 +179,16 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="285dp"
-                        android:layout_height="64dp">
+                        android:layout_height="64dp"
+                        app:startIconDrawable="@drawable/baseline_access_time_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:editable="false"
-                            android:hint="Time" />
+                            android:hint="Time"
+                            android:paddingStart="48dp"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton

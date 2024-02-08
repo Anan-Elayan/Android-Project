@@ -299,8 +299,6 @@ public class AddCourseActivity extends AppCompatActivity {
         boolean dark_mode = prefs.getBoolean("DARK MODE",false);
         if(dark_mode){
             constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
-
-
             txtStartTime.setTextColor(getResources().getColor(R.color.white));
             txtEndTime.setTextColor(getResources().getColor(R.color.white));
             txtDate.setTextColor(getResources().getColor(R.color.white));

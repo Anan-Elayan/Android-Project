@@ -83,15 +83,17 @@
                     android:id="@+id/textInputLayout4"
                     style="@style/textfieldsstyls"
                     android:layout_marginTop="36dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_marginBottom="7dp"
+                    app:startIconDrawable="@drawable/outline_assignment_ind_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/studentID"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
 
                         android:hint="Student ID"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number|numberDecimal"
+                        android:paddingStart="48dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,14 +114,16 @@
                     android:layout_height="64dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_marginBottom="7dp"
+                    android:hint="@string/password"
+                    app:startIconDrawable="@drawable/sharp_lock_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
-                        android:inputType="number|numberDecimal" />
+                        android:inputType="number|numberDecimal"
+                        android:paddingStart="48dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView

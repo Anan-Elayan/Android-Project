@@ -62,11 +62,7 @@ public class TaskDetails extends AppCompatActivity {
         Intent intent = getIntent();
         taskID = intent.getStringExtra("taskID");
         setupViews();
-
-        System.out.println("taskIDdddddd" + taskID);
         getTask();
-
-
         btnClock.setOnClickListener(new View.OnClickListener() {
             int hour = 0, minutes = 0;
 

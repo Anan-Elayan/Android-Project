@@ -235,6 +235,10 @@ public class Register extends AppCompatActivity {
         boolean dark_mode = prefs.getBoolean("DARK MODE", false);
         if (dark_mode) {
             constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
+            textInputEditTextStudentID.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextEmail.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextPassword.setTextColor(getResources().getColor(R.color.white));
+            textInputEditTextName.setTextColor(getResources().getColor(R.color.white));
         }
     }
 

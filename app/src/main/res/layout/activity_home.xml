@@ -64,9 +64,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCourses"
-        android:layout_width="389dp"
-        android:layout_height="431dp"
+        android:layout_width="391dp"
+        android:layout_height="522dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="10dp"
         app:layout_constraintBottom_toTopOf="@id/butonNavegation"
         app:layout_constraintEnd_toEndOf="parent"
