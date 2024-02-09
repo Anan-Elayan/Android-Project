@@ -56,6 +56,8 @@ public class AddCourseActivity extends AppCompatActivity {
     TextView txtWarningCourseID;
     TextView txtWarningDr;
     private SharedPreferences prefs;
+    public ArrayList<Course> courseList;
+
     Button btnAdd;
     Intent intent;
     ArrayList<Course>courseIDToSpinner;
@@ -151,6 +153,12 @@ public class AddCourseActivity extends AppCompatActivity {
         }
 
         else {
+            for (int i = 0; i < HomeActivity.courseList.size(); i++) {
+                if(spinnerCourse.getSelectedItem().toString().equals(HomeActivity.courseList.get(i).getCourseID())){
+                    Toast.makeText(AddCourseActivity.this, "المساق هاد عندك يا غالي 😊",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
             addToBackEnd(LoginActivity.id, courseid, instructor);
         }
     }
@@ -288,6 +296,44 @@ public class AddCourseActivity extends AppCompatActivity {
             }
         }
     }
+
+//    public void getCourseDetails(String courseID) {
+//        //Course courseDetails;
+//        String url = "http://10.0.2.2:5000/getCoursesById/" + courseID;
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
+//                null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                try {
+//                    JSONObject obj = response.getJSONObject(0);
+//                    String courseDr = obj.getString("courseDr");
+//                    String courseEndTime = obj.getString("courseEndTime");
+//                    String courseID = obj.getString("courseID");
+//                    String courseStartTime = obj.getString("courseStartTime");
+//                    String date = obj.getString("date");
+//                    courseDetails = new Course(courseID, courseStartTime, courseDr, date, courseEndTime);
+//                    System.out.println("first ID ----> " + courseDetails.getCourseID());
+//                    courseList.add(courseDetails);
+//
+//
+//                } catch (JSONException exception) {
+//                    Log.d("Error", exception.toString());
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//                Toast.makeText(HomeActivity.this, error.toString(),
+//                        Toast.LENGTH_SHORT).show();
+//                Log.d("Error_json", error.toString());
+//            }
+//        });
+//        queue.add(request);
+//
+//    }
+
 
 
     private void setupSharedPrefs() {

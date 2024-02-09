@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     MeowBottomNavigation meowBottomNavigation;
     RecyclerView recyclerViewCourses;
     CourseAdapter courseAdapter;
-    public ArrayList<Course> courseList;
+    public  static  ArrayList<Course> courseList;
     private Course courseDetails;
 
     public String id = LoginActivity.id;
@@ -188,7 +188,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     public void getCourseDetails(String courseID) {
-        System.out.println("getCourseDetails");
         //Course courseDetails;
         String url = "http://10.0.2.2:5000/getCoursesById/" + courseID;
         RequestQueue queue = Volley.newRequestQueue(this);
