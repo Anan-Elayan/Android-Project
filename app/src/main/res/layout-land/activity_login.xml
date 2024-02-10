@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".LoginAndRegister.LoginActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+
+
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="410dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Welcome Back!"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout4"
+                    style="@style/textfieldsstyls"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginBottom="7dp"
+                    app:startIconDrawable="@drawable/outline_assignment_ind_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/studentID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:hint="Student ID"
+                        android:inputType="number|numberDecimal"
+                        android:paddingStart="48dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningLoginStudentID"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="لو سمحت ادخل رقمك الجامعي"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout5"
+                    style="@style/textfieldsstyls"
+                    android:layout_width="362dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="7dp"
+                    android:hint="@string/password"
+                    app:startIconDrawable="@drawable/sharp_lock_person_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:paddingStart="48dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningLoginPassword"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="لو سمحت ادخل رقمك السري"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <CheckBox
+                    android:id="@+id/rememberMe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Remember me"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/styleButton"
+                    android:layout_width="303dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="ActionLogin"
+                    android:paddingHorizontal="20dp"
+                    android:paddingStart="20dp"
+                    android:text="Log in"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnSignUp"
+                    style="@style/styleButton"
+                    android:layout_width="303dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="32dp"
+                    android:onClick="ActionRegister"
+                    android:text="SIGN UP" />
+            </LinearLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

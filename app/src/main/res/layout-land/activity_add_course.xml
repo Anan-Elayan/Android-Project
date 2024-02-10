@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context=".addCourse.AddCourseActivity">
+
+
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:id="@+id/butonNavegation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCourse"
+        app:mbn_backgroundBottomColor="@color/green"
+        app:mbn_circleColor="@color/white"
+        app:mbn_rippleColor="@color/iconColorNavigation"
+        app:mbn_selectedIconColor="@color/black"
+        tools:ignore="MissingConstraints">
+
+    </com.etebarian.meowbottomnavigation.MeowBottomNavigation>
+
+
+    <Button
+        android:id="@+id/btnAdd"
+        style="@style/styleButton"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="68dp"
+        android:onClick="actionAdd"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
+
+    <Spinner
+        android:id="@+id/spinnerCourse"
+        style="@style/CustomSpinnerStyle1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="267dp"
+        app:layout_constraintBottom_toTopOf="@+id/butonNavegation"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/textfieldsstyls"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="78dp"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDr">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtStartTime"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Start Time" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout6"
+        style="@style/textfieldsstyls"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDr">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="End Time" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout7"
+        style="@style/textfieldsstyls"
+        android:layout_width="305dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:hint="Date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinnerDr"
+        style="@style/CustomSpinnerStyle1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="86dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerCourse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCourse"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCourse" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

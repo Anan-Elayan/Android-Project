@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".LoginAndRegister.Register"
+    tools:ignore="ExtraText">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <ScrollView
+            android:layout_width="391dp"
+            android:layout_height="569dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintVertical_bias="0.0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userImg"
+                    android:layout_width="78dp"
+                    android:layout_height="77dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/user1"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    app:strokeColor="@color/whitedark"
+                    app:strokeWidth="1dp"
+                    tools:elevation="2dp" />
+
+                <ImageView
+                    android:id="@+id/register_img"
+                    android:layout_width="52dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-20dp"
+                    android:elevation="3dp"
+                    app:srcCompat="@drawable/photo_64" />
+
+                <TextView
+                    android:id="@+id/txtWarningImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:text="اعطينا صورتك الورة "
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutPassword"
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/outline_assignment_ind_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextStudetnID"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Stdent ID"
+                            android:inputType="number|numberDecimal"
+                            android:paddingStart="48dp"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/txtWarningID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="لو سمحت دخل رقمك الجامعي يا محترم"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout4"
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/outline_account_circle_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name"
+                            android:inputType="text|textCapWords"
+                            android:paddingStart="48dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/txtWarningName"
+                        android:layout_width="181dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="329dp"
+                        android:text="لو سمحت دخل اسمك يا محترم"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout2"
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/outline_email_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Email"
+                            android:inputType="text"
+                            android:paddingStart="48dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/txtWarningEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="لو سمحت دخل الايميل يا محترم"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout3"
+                        style="@style/Regtextfieldsstyls"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/sharp_lock_person_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Password"
+                            android:inputType="number|numberDecimal"
+                            android:paddingStart="48dp"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/txtWarningPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="لو سمحت ادخل الرقم السري يا محترم"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/styleButton"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="registerClicked"
+                    android:text="Register"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

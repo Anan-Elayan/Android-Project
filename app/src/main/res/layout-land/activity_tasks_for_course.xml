@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Task.TasksForCourse">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="400dp"
+        android:layout_height="63dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/lblCourseid"
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:onClick="showTasks"
+            android:text="Task for Comp336"
+            android:textColor="@color/black"
+            android:textSize="25dp" />
+
+        <ImageButton
+            android:id="@+id/btnAddNewTask"
+            android:layout_width="124dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:onClick="AddNewTask"
+            android:src="@drawable/add" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listViewTasks"
+        android:layout_width="734dp"
+        android:layout_height="324dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="12dp"
+        android:headerDividersEnabled="true"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

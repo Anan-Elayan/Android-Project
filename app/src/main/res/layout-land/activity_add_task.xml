@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Task.AddTask">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+
+        <ScrollView
+            android:layout_width="406dp"
+            android:layout_height="608dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCourseName"
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="COMP336-Add Task"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textfieldsstyls"
+                    android:layout_width="351dp"
+
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="7dp"
+                    app:startIconDrawable="@drawable/baseline_title_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Title"
+                        android:paddingStart="48dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningTitle"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="لو سحمت ادخل عنوان المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textfieldsstyls"
+                    android:layout_width="348dp"
+                    android:layout_height="106dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="7dp"
+                    app:startIconDrawable="@drawable/baseline_add_task_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="96dp"
+                        android:hint="Description"
+                        android:paddingStart="48dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningDescription"
+                    android:layout_width="174dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="لو سمحت ادخل وصف المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="367dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="285dp"
+                        android:layout_height="64dp"
+                        app:startIconDrawable="@drawable/baseline_date_range_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:hint="Date"
+                            android:paddingStart="48dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnCalender"
+                        android:layout_width="50dp"
+                        android:layout_height="53dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/calendar_alt" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningDate"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="لو سمحت ادخل تاريخ المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="367dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="285dp"
+                        android:layout_height="64dp"
+                        app:startIconDrawable="@drawable/baseline_access_time_24">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:hint="Time"
+                            android:paddingStart="48dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnClock"
+                        android:layout_width="51dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/clock" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtWarningTime"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="لو سمحنت ادخل وقت المهمة"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="invisible" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="271dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="0dp" />
+
+                <Button
+                    android:id="@+id/btnUpdateTask"
+                    style="@style/styleButton"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:onClick="AddNewTask"
+                    android:text="Add Tasks" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
