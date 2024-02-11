@@ -153,4 +153,32 @@
             android:hint="Date" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/txtWarningDr"
+        android:layout_width="175dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="5dp"
+        android:text="اختر دكتورك يا وردة"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDr" />
+
+    <TextView
+        android:id="@+id/txtWarningCourseID"
+        android:layout_width="318dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="5dp"
+        android:text="لو سمحت اختر رمز المساق يا وردة"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCourse" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

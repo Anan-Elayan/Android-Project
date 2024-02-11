@@ -11,7 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,9 +87,20 @@ public class Register extends AppCompatActivity {
         txtWarningPassword = findViewById(R.id.txtWarningPassword);
         txtWarningImage = findViewById(R.id.txtWarningImage);
 
+        int maxLength = 7;
+        InputFilter[] filters = new InputFilter[1];
+        filters[0] = new InputFilter.LengthFilter(maxLength);
+        textInputEditTextStudentID.setFilters(filters);
     }
 
     public void registerClicked(View view) {
+
+        txtWarningID.setVisibility(View.INVISIBLE);
+        txtWarningName.setVisibility(View.INVISIBLE);
+        txtWarningEmail.setVisibility(View.INVISIBLE);
+        txtWarningPassword.setVisibility(View.INVISIBLE);
+        txtWarningImage.setVisibility(View.INVISIBLE);
+
         String studentID = textInputEditTextStudentID.getText().toString();
         String studentName = textInputEditTextName.getText().toString();
         String studentEmail = textInputEditTextEmail.getText().toString();
@@ -111,8 +124,24 @@ public class Register extends AppCompatActivity {
         if(image.isEmpty()){
             txtWarningImage.setVisibility(View.VISIBLE);
         }
-        else {
+        if (studentEmail.isEmpty()) {
+            txtWarningEmail.setVisibility(View.VISIBLE);
+        }
+        else if(!Patterns.EMAIL_ADDRESS.matcher(studentEmail).matches()){
+            txtWarningEmail.setVisibility(View.VISIBLE);
+            txtWarningEmail.setText("اكتب ايميل بطريقة صح يا غالي");
+        }
 
+        if(textInputEditTextStudentID.getText().length()!=7){
+            txtWarningID.setText("لو سمحت دخل رقمك الجامعي صحيح");
+            txtWarningID.setVisibility(View.VISIBLE);
+        }
+        if(textInputEditTextPassword.getText().length()<=7 || textInputEditTextPassword.getText().length()>=41){
+            txtWarningPassword.setText("لو سمحت دخل رقم سري بين 8 و 40 خانة");
+            txtWarningPassword.setVisibility(View.VISIBLE);
+
+        }
+        else {
 
             String url = "http://10.0.2.2:5000/getStudent";
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -189,7 +218,6 @@ public class Register extends AppCompatActivity {
 
                         Toast.makeText(Register.this, str,
                                 Toast.LENGTH_SHORT).show();
-
                     }
                 },
                 new Response.ErrorListener() {

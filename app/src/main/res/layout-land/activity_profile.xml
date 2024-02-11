@@ -47,7 +47,7 @@
                 android:id="@+id/switchMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="275dp"
+                android:layout_marginLeft="500dp"
                 android:thumb="@drawable/thumb"
                 android:track="@drawable/track" />
 

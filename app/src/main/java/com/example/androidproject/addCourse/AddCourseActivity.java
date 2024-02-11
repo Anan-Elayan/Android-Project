@@ -54,7 +54,9 @@ public class AddCourseActivity extends AppCompatActivity {
     TextInputEditText txtEndTime;
     TextInputEditText txtDate;
     TextView txtWarningCourseID;
+
     TextView txtWarningDr;
+
     private SharedPreferences prefs;
     public ArrayList<Course> courseList;
 
@@ -69,6 +71,7 @@ public class AddCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
         setupViews();
+
         setupSpinnerValue();
         bottomNavigationSetUp();
 
@@ -82,6 +85,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
             }
         });
+
         setupSharedPrefs();
         ColorMode();
 
@@ -95,6 +99,8 @@ public class AddCourseActivity extends AppCompatActivity {
         txtEndTime = findViewById(R.id.txtEndTime);
         txtDate = findViewById(R.id.txtDate);
         constraintLayout = findViewById(R.id.constraintLayout);
+        txtWarningDr = findViewById(R.id.txtWarningDr);
+        txtWarningCourseID = findViewById(R.id.txtWarningCourseID);
 
 
     }
@@ -140,15 +146,19 @@ public class AddCourseActivity extends AppCompatActivity {
 
 
     public void actionAdd(View view) {
+        txtWarningCourseID.setVisibility(View.INVISIBLE);
+        txtWarningDr.setVisibility(View.INVISIBLE);
+
         String courseid = spinnerCourse.getSelectedItem().toString();
         String instructor = spinnerDr.getSelectedItem().toString();
         String startTime = txtStartTime.getText().toString();
         String endTime = txtEndTime.getText().toString();
         String date = txtDate.getText().toString();
-        if(courseid.isEmpty()){
+        if(courseid.equals("Course Name")){
                 txtWarningCourseID.setVisibility(View.VISIBLE);
+
         }
-        if(instructor.isEmpty()){
+        if(instructor.equals("Dr Name")){
             txtWarningDr.setVisibility(View.VISIBLE);
         }
 
@@ -160,6 +170,9 @@ public class AddCourseActivity extends AppCompatActivity {
                 }
             }
             addToBackEnd(LoginActivity.id, courseid, instructor);
+            Intent intent1 = new Intent(AddCourseActivity.this,HomeActivity.class);
+            startActivity(intent1);
+            finish();
         }
     }
 
@@ -214,6 +227,7 @@ public class AddCourseActivity extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 courseIDToSpinner =  new ArrayList<>();
                 ArrayList<String>showDataList =  new ArrayList<>();
+                showDataList.add(0,"Course Name");
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
@@ -268,6 +282,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
     public  void fillSpinnerDr(){
         ArrayList<String>doctorList= new ArrayList<>();
+        doctorList.add(0,"Dr Name");
         for (int i = 0; i < courseIDToSpinner.size(); i++) {
             if(courseIDToSpinner.get(i).getCourseID().equals(spinnerCourse.getSelectedItem().toString())){
                 doctorList.add(courseIDToSpinner.get(i).getProfessorName());
@@ -297,42 +312,7 @@ public class AddCourseActivity extends AppCompatActivity {
         }
     }
 
-//    public void getCourseDetails(String courseID) {
-//        //Course courseDetails;
-//        String url = "http://10.0.2.2:5000/getCoursesById/" + courseID;
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-//                null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                try {
-//                    JSONObject obj = response.getJSONObject(0);
-//                    String courseDr = obj.getString("courseDr");
-//                    String courseEndTime = obj.getString("courseEndTime");
-//                    String courseID = obj.getString("courseID");
-//                    String courseStartTime = obj.getString("courseStartTime");
-//                    String date = obj.getString("date");
-//                    courseDetails = new Course(courseID, courseStartTime, courseDr, date, courseEndTime);
-//                    System.out.println("first ID ----> " + courseDetails.getCourseID());
-//                    courseList.add(courseDetails);
-//
-//
-//                } catch (JSONException exception) {
-//                    Log.d("Error", exception.toString());
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                Toast.makeText(HomeActivity.this, error.toString(),
-//                        Toast.LENGTH_SHORT).show();
-//                Log.d("Error_json", error.toString());
-//            }
-//        });
-//        queue.add(request);
-//
-//    }
+
 
 
 

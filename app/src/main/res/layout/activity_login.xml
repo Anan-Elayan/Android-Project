@@ -116,13 +116,14 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="7dp"
                     android:hint="@string/password"
-                    app:startIconDrawable="@drawable/sharp_lock_person_24">
+                    app:startIconDrawable="@drawable/sharp_lock_person_24"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/pass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number|numberDecimal"
+                        android:inputType="numberPassword"
                         android:paddingStart="48dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 

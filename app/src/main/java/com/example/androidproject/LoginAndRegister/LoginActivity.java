@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -74,6 +75,11 @@ public class LoginActivity extends AppCompatActivity {
         txtWarningLoginStudentID = findViewById(R.id.txtWarningLoginStudentID);
         txtWarningLoginPassword = findViewById(R.id.txtWarningLoginPassword);
         queue = Volley.newRequestQueue(this);
+
+        int maxLength = 7;
+        InputFilter[] filters = new InputFilter[1];
+        filters[0] = new InputFilter.LengthFilter(maxLength);
+        studentID.setFilters(filters);
     }
 
     @Override
@@ -89,6 +95,11 @@ public class LoginActivity extends AppCompatActivity {
             txtWarningLoginPassword.setVisibility(View.VISIBLE);
             return;
         }
+        if(studentID.getText().length()!=7){
+            txtWarningLoginStudentID.setText("لو سمحت دخل رقمك الجامعي صحيح");
+            txtWarningLoginStudentID.setVisibility(View.VISIBLE);
+        }
+
         id = studentID.getText().toString();
         int isExist = Check(); // to check the input data if exist or no
         if (isExist == 1) {

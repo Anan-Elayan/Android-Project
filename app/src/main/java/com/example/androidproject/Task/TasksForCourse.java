@@ -39,6 +39,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 public class TasksForCourse extends AppCompatActivity implements OnItemClickListener  {
 
@@ -51,13 +53,18 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     ConstraintLayout constraintLayout;
     private SharedPreferences prefs;
 
+    TextView textView;
+    private GifImageView load;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         System.out.println("First");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tasks_for_course); // Move this line here
+        setContentView(R.layout.activity_tasks_for_course);
+        textView = findViewById(R.id.textView);
+        load=findViewById(R.id.load);
         taskList = new ArrayList<>();
 
         listViewTasks = findViewById(R.id.listViewTasks);
@@ -77,8 +84,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     @Override
     protected void onStart(){
         super.onStart();
+        textView.setVisibility(View.INVISIBLE);
         setupTasks();
-        // setupRecyclerView();
+
 
     }
 
@@ -132,13 +140,16 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
 
                         Task task = new Task(studentID,CourseID,taskTitle, taskDescription,taskDate,taskTime,taskID);
                         System.out.println("task--> " + task.toString());
-
+                        load.setVisibility(View.INVISIBLE);
                         taskList.add(task);
 
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
                     }
                 }
+                if(response.length()<1)
+                    textView.setVisibility(View.VISIBLE);
+
                 setupListView();
             }
         }, new Response.ErrorListener() {

@@ -44,11 +44,13 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class HomeActivity extends AppCompatActivity implements OnItemClickListener {
     MeowBottomNavigation meowBottomNavigation;
     RecyclerView recyclerViewCourses;
     CourseAdapter courseAdapter;
-    public  static  ArrayList<Course> courseList;
+    public static ArrayList<Course> courseList;
     private Course courseDetails;
 
     public String id = LoginActivity.id;
@@ -56,6 +58,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     private SharedPreferences prefs;
     TextView textViewMyCourses;
     TextView textView;
+    private GifImageView load;
+    private GifImageView load2;
 
 
     @Override
@@ -65,12 +69,15 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+        load = findViewById(R.id.load);
+        load2 = findViewById(R.id.load2);
         recyclerViewCourses = findViewById(R.id.recyclerViewCourses);
         meowBottomNavigation = findViewById(R.id.butonNavegation);
         constraintHome = findViewById(R.id.constraintHome);
         textViewMyCourses = findViewById(R.id.textViewMyCourses);
         textView = findViewById(R.id.textView);
-        textView.setVisibility(View.VISIBLE);
+        // textView.setVisibility(View.VISIBLE);
         setupBottomNavigation();
         setupCourses();
         setupSharedPrefs();
@@ -109,12 +116,11 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void setupRecyclerView() {
-
-        textView.setVisibility(View.INVISIBLE);
         courseAdapter = new CourseAdapter(courseList);
         courseAdapter.setOnItemClickListener(this);
         recyclerViewCourses.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCourses.setAdapter(courseAdapter);
+
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -151,7 +157,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
 
-
     public void setupCourses() {
         System.out.println("setupCourses");
         //String id = LoginActivity.id;
@@ -166,12 +171,18 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                         JSONObject obj = response.getJSONObject(i);
                         String courseId = obj.getString("courseID");
                         getCourseDetails(courseId);
-                        System.out.println("Size list" + courseList.size());
-                        //setupRecyclerView();
+                        load.setVisibility(View.INVISIBLE);
+
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
                     }
                 }
+                if (response.length() < 1) {
+                    load.setVisibility(View.INVISIBLE);
+                    textView.setVisibility(View.VISIBLE);
+                    load2.setVisibility(View.VISIBLE);
+                }
+
             }
 
         }, new Response.ErrorListener() {
@@ -210,6 +221,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
                 } catch (JSONException exception) {
                     Log.d("Error", exception.toString());
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -288,9 +300,9 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
 
-    private void ColorMode(){
-        boolean dark_mode = prefs.getBoolean("DARK MODE",false);
-        if(dark_mode){
+    private void ColorMode() {
+        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
+        if (dark_mode) {
             constraintHome.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
             textViewMyCourses.setTextColor(getResources().getColor(R.color.white));
             textView.setTextColor(getResources().getColor(R.color.white));
