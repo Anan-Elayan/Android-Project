@@ -208,8 +208,8 @@
                         style="@style/Regtextfieldsstyls"
                         android:layout_width="360dp"
                         android:layout_height="wrap_content"
-                        app:startIconDrawable="@drawable/sharp_lock_person_24"
-                        app:passwordToggleEnabled="true">
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/sharp_lock_person_24">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputEditTextPassword"
@@ -217,7 +217,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Password"
                             android:inputType="numberPassword"
-                            android:paddingStart="48dp"/>
+                            android:paddingStart="48dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

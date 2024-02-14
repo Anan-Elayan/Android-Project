@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -59,7 +60,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        constraintLayout=findViewById(R.id.constraintLayout);
+        constraintLayout = findViewById(R.id.constraintLayout);
         setupViews();
         setupSharedPrefs();
         ColorMode();
@@ -105,42 +106,48 @@ public class Register extends AppCompatActivity {
         String studentName = textInputEditTextName.getText().toString();
         String studentEmail = textInputEditTextEmail.getText().toString();
         String studentPassword = textInputEditTextPassword.getText().toString();
-        String image = (uriImg != null) ? uriImg.toString() : "";
+        String  image = (uriImg != null) ? uriImg.toString() : "content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F32/ORIGINAL/NONE/image%2Fpng/736934283";
 
-        if (studentID.isEmpty()) {
-            txtWarningID.setVisibility(View.VISIBLE);
-        }
-        if (studentName.isEmpty()) {
-            txtWarningName.setVisibility(View.VISIBLE);
 
-        }
-        if (studentEmail.isEmpty()) {
-            txtWarningEmail.setVisibility(View.VISIBLE);
-        }
-        if (studentPassword.isEmpty()) {
-            txtWarningPassword.setVisibility(View.VISIBLE);
+        if(studentID.isEmpty() || studentName.isEmpty() || studentEmail.isEmpty() ||studentPassword.isEmpty() || textInputEditTextStudentID.getText().length() < 7||
+                !Patterns.EMAIL_ADDRESS.matcher(studentEmail).matches() || (textInputEditTextPassword.getText().length() <= 7 || textInputEditTextPassword.getText().length() >= 41)) {
 
-        }
-        if(image.isEmpty()){
-            txtWarningImage.setVisibility(View.VISIBLE);
-        }
-        if (studentEmail.isEmpty()) {
-            txtWarningEmail.setVisibility(View.VISIBLE);
-        }
-        else if(!Patterns.EMAIL_ADDRESS.matcher(studentEmail).matches()){
-            txtWarningEmail.setVisibility(View.VISIBLE);
-            txtWarningEmail.setText("اكتب ايميل بطريقة صح يا غالي");
+
+            if (studentID.isEmpty()) {
+                txtWarningID.setVisibility(View.VISIBLE);
+            }
+            if (studentName.isEmpty()) {
+                txtWarningName.setVisibility(View.VISIBLE);
+
+            }
+
+            if (studentPassword.isEmpty()) {
+                txtWarningPassword.setVisibility(View.VISIBLE);
+
+            }
+//        if (image.isEmpty()) {
+//            txtWarningImage.setVisibility(View.VISIBLE);
+//        }
+            if (studentEmail.isEmpty()) {
+                txtWarningEmail.setVisibility(View.VISIBLE);
+            }
+
+            else if (!Patterns.EMAIL_ADDRESS.matcher(studentEmail).matches()) {
+                txtWarningEmail.setVisibility(View.VISIBLE);
+                txtWarningEmail.setText("اكتب ايميل بطريقة صح يا غالي");
+            }
+
+            if (textInputEditTextStudentID.getText().length() < 7) {
+                txtWarningID.setText("لو سمحت دخل رقمك الجامعي صحيح");
+                txtWarningID.setVisibility(View.VISIBLE);
+
+            }
+            if (textInputEditTextPassword.getText().length() <= 7 || textInputEditTextPassword.getText().length() >= 41) {
+                txtWarningPassword.setText("لو سمحت دخل رقم سري بين 8 و 40 خانة");
+                txtWarningPassword.setVisibility(View.VISIBLE);
+            }
         }
 
-        if(textInputEditTextStudentID.getText().length()!=7){
-            txtWarningID.setText("لو سمحت دخل رقمك الجامعي صحيح");
-            txtWarningID.setVisibility(View.VISIBLE);
-        }
-        if(textInputEditTextPassword.getText().length()<=7 || textInputEditTextPassword.getText().length()>=41){
-            txtWarningPassword.setText("لو سمحت دخل رقم سري بين 8 و 40 خانة");
-            txtWarningPassword.setVisibility(View.VISIBLE);
-
-        }
         else {
 
             String url = "http://10.0.2.2:5000/getStudent";

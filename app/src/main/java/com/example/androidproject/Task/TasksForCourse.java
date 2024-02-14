@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import pl.droidsonroids.gif.GifImageView;
 
 
-public class TasksForCourse extends AppCompatActivity implements OnItemClickListener  {
+public class TasksForCourse extends AppCompatActivity implements OnItemClickListener {
 
 
     ListView listViewTasks;
@@ -55,6 +55,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
 
     TextView textView;
     private GifImageView load;
+    private GifImageView load3;
 
 
     @Override
@@ -64,7 +65,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks_for_course);
         textView = findViewById(R.id.textView);
-        load=findViewById(R.id.load);
+        load = findViewById(R.id.load);
+        load3 = findViewById(R.id.load3);
+
         taskList = new ArrayList<>();
 
         listViewTasks = findViewById(R.id.listViewTasks);
@@ -82,7 +85,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         textView.setVisibility(View.INVISIBLE);
         setupTasks();
@@ -92,13 +95,13 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
 
     public void AddNewTask(View view) {
         Intent intent = new Intent(TasksForCourse.this, AddTask.class);
-        intent.putExtra("course",  course );
+        intent.putExtra("course", course);
         startActivity(intent);
     }
 
     private void setupListView() {
         System.out.println("First");
-        listAdapter = new TaskListAdapter(TasksForCourse.this,taskList);
+        listAdapter = new TaskListAdapter(TasksForCourse.this, taskList);
         listViewTasks.setAdapter(listAdapter);
         System.out.println("second");
 
@@ -108,7 +111,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task selectedTask = taskList.get(position);
                 Intent intent = new Intent(TasksForCourse.this, TaskDetails.class);
-                System.out.println("taskID 1"+selectedTask.getTaskID());
+                System.out.println("taskID 1" + selectedTask.getTaskID());
                 intent.putExtra("taskID", selectedTask.getTaskID());
                 startActivity(intent);
             }
@@ -121,7 +124,7 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         System.out.println("setupCourses");
         //String id = LoginActivity.id;
 
-        String url = "http://10.0.2.2:5000/getTasksById/" +"/"+ LoginActivity.id+"/"+course.getCourseID();
+        String url = "http://10.0.2.2:5000/getTasksById/" + "/" + LoginActivity.id + "/" + course.getCourseID();
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -138,18 +141,20 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
                         String taskTitle = obj.getString("taskTitle");
                         String taskID = obj.getString("taskID");
 
-                        Task task = new Task(studentID,CourseID,taskTitle, taskDescription,taskDate,taskTime,taskID);
-                        System.out.println("task--> " + task.toString());
-                        load.setVisibility(View.INVISIBLE);
+                        Task task = new Task(studentID, CourseID, taskTitle, taskDescription, taskDate, taskTime, taskID);
                         taskList.add(task);
+                        load.setVisibility(View.INVISIBLE);
+                        load3.setVisibility(View.INVISIBLE);
 
                     } catch (JSONException exception) {
                         Log.d("Error", exception.toString());
                     }
                 }
-                if(response.length()<1)
+                if (response.length() < 1) {
+                    load.setVisibility(View.INVISIBLE);
                     textView.setVisibility(View.VISIBLE);
-
+                    load3.setVisibility(View.VISIBLE);
+                }
                 setupListView();
             }
         }, new Response.ErrorListener() {
@@ -161,8 +166,6 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
             }
         });
         queue.add(request);
-
-        // return courseList;
     }
 
 
@@ -181,9 +184,9 @@ public class TasksForCourse extends AppCompatActivity implements OnItemClickList
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
-    private void ColorMode(){
-        boolean dark_mode = prefs.getBoolean("DARK MODE",false);
-        if(dark_mode){
+    private void ColorMode() {
+        boolean dark_mode = prefs.getBoolean("DARK MODE", false);
+        if (dark_mode) {
             constraintLayout.setBackgroundColor(getResources().getColor(R.color.blackModeColor));
             lblCourseid.setTextColor(getResources().getColor(R.color.white));
 
