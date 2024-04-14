@@ -16,11 +16,18 @@ The Android project is a mobile application developed using Java and Android Stu
 
    
 # Technology Stack
-Programming Language: Java, Python
+Programming Language: Java, Python ![1_dKU4uBSnJCs4jzkkuiALoQ](https://github.com/Anan-Elayan/Android-Project/assets/99610614/803ea743-ba3b-434c-826b-fcd0f4565ed4)
+
 Development Environment: Android Studio , Postman, PyCharm
+![JetBrains-PyCharm](https://github.com/Anan-Elayan/Android-Project/assets/99610614/b15df647-f799-491e-abbd-691b00a84823)
+![Android Studio - Header](https://github.com/Anan-Elayan/Android-Project/assets/99610614/4e4f4be6-3aa4-4ffa-a99f-1b0c832bde64)
+![postman-logo-vert-2018](https://github.com/Anan-Elayan/Android-Project/assets/99610614/4b13d971-adf6-44a9-b69f-298e2f718e65)
+
 User Interface: XML layouts
-Database: MySQl
+Database: MySQl  ![PhpMyAdmin_logo svg](https://github.com/Anan-Elayan/Android-Project/assets/99610614/54c17bac-18f3-452a-8956-ba07d3dc2654)
+
 Backend: Python Flask
+
 
 
 # Getting Started
